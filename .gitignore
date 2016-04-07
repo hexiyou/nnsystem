@@ -1,1 +1,4 @@
 .idea/
+.phpintel/
+runtime/
+!runtime/.gitkeep
