@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 09:47:06
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-07 12:25:35
+ * @Last Modified time: 2016-04-09 12:17:21
  */
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",APP_PATH.'/framework');
@@ -13,7 +13,7 @@ if(file_exists(APP_PATH.'/db_config.php')){
 	include_once(APP_PATH.'/db_config.php');
 }
 
-// 载入模板配置
+// 载入模板初始配置
 if(file_exists(APP_PATH.'/view_config.php')){
 	include_once(APP_PATH.'/view_config.php');
 }
@@ -28,5 +28,8 @@ require_once(APP_PATH.'/common.inc.php');
 
 /** 载入框架 **/
 require(SP_PATH."/SpeedPHP.php");
+
+import('baseContoller.php');
+
 //启动应用
 spRun();
