@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-09 11:32:08
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-09 16:17:24
+ * @Last Modified time: 2016-04-09 17:41:40
  */
 class baseContoller extends spController
 {
@@ -12,6 +12,9 @@ class baseContoller extends spController
 	function __construct()
 	{
 		parent::__construct();
+		if($GLOBALS['G_C']['template_suffix']!=""){
+			$this->tpl_suffix = $GLOBALS['G_C']['template_suffix'];
+		}
 		$this->__set_siteConfig(); //公共变量赋值
 		$this->seo();
 		if(IS_DEBUG) $this->enable_php_tag(TRUE);
@@ -25,6 +28,7 @@ class baseContoller extends spController
 	public function __set_siteConfig(){
 		$this->__set('CFG',$GLOBALS['G_C']); //config.php 配置项赋值
 		$this->site_name = $GLOBALS['G_C']['site_name'];
+		$this->site_url =  $GLOBALS['G_C']['site_url'];
 	}
 
 	/**
@@ -89,10 +93,34 @@ class baseContoller extends spController
      * [enable_php_tag 是否允许在Smarty模板中书写PHP标签]
      * @param  boolean $status [开关选项TRUE OR FALASE]
      * @return [type]          [description]
+     * @author hexiyou.cn@gmail.com
      */
     public function enable_php_tag($status=FALSE)
     {
     	$this->getView()->allow_php_tag = $status;
+    }
+
+
+
+    /**
+	 * 输出模板 覆写 spContoller display方法，省略后缀
+	 *
+     * @param $tplname   模板路径及名称
+     * @param $output   是否直接显示模板，设置成FALSE将返回HTML而不输出
+     * @author hexiyou.cn@gmail.com
+	 */
+	public function display($tplname, $output = TRUE)
+	{
+		if($this->tpl_suffix && stripos($tplname,$this->tpl_suffix)===false) 
+			$tplname.=$this->tpl_suffix;
+    	@ob_start();
+		if(TRUE == $GLOBALS['G_SP']['view']['enabled']){
+			$this->v->display($tplname);
+		}else{
+			extract($this->__template_vals);
+			require($tplname);
+		}
+		if( TRUE != $output )return ob_get_clean();
     }
 
 }

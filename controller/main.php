@@ -13,7 +13,7 @@ class main extends baseContoller
 	}
 
     function index() {
-        $this->display('index.html');
+        $this->display('index');
     }
 
     
@@ -22,10 +22,6 @@ class main extends baseContoller
 
     
     function write() {
-    }
-
-    
-    function test_update() {
     }
 
 
