@@ -3,16 +3,29 @@ isset($db) && $spConfig['db'] = $db;
 isset($view) && $spConfig['view'] = $view;
 isset($config) && define('TPL_DIR', $config['template'] . '/');
 define('SITE_PATH', $config['site_path'] != "" ? $config['site_path'] : '/');
+define('TPL_TRUE_PATH',APP_PATH.'/template/'.TPL_DIR); //模板真实路径
+// 定义SKIN PATH
+define('SKIN_PATH', SITE_PATH . 'skin/' . $config['template'] . '/');
+define('CSS_PATH', SKIN_PATH . 'css/');
+define('JS_PATH', SKIN_PATH . 'js/');
+
+define('SKIN_IMG', SKIN_PATH . 'images/');
+define('IMG_PATH', SITE_PATH.'statics/images/');
+
 
 $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . '/runtime/tmp'; //临时目录
+$spConfig['dispatcher_error'] = "import(SP_PATH.'/Misc/404.php');exit();"; //404错误页面
 // $spConfig['auto_load_controller'][] = 'base'; //自动加载控制器
 
 $spConfig['spUrlRewrite'] = array(
-	'suffix' => '.html',
+	// 'suffix' => '.html',
+	'suffix' => '',
 	'sep' => '-',
 	'map' => array(
 		'ok' => 'note@test',
+		'404'=>'error_404',
+		'*-list'=>'*@list_action',
 	),
 	'args' => array(),
 );
@@ -31,6 +44,7 @@ $spConfig['launch'] = array( // 加入挂靠点，以便开始使用Url_ReWrite�
 if (isset($config['template']) && !empty($config['template'])) {
 	$spConfig['view']['config']['template_dir'] .= trim($config['template']) . '/';
 
+	$spConfig['dispatcher_error'] = "import(\$GLOBALS['G_SP']['controller_path'].DIRECTORY_SEPARATOR.'error_404.php');\$handle=spClass('error_404');\$handle->handle(\$__controller,\$__action);;exit();"; //404错误页面
 	//自动加载模板
 	$spConfig['view']['auto_display'] = TRUE; // 是否使用自动输出模板功能
 	$spConfig['view']['auto_display_sep'] = '_'; // 自动输出模板的拼装模式，/为按目录方式拼装，_为按下划线方式，以此类推
@@ -39,13 +53,6 @@ if (isset($config['template']) && !empty($config['template'])) {
 
 //GLOBAL config 整站备用全局变量
 $G_C = $config;
-// 定义SKIN PATH
-define('SKIN_PATH', SITE_PATH . 'skin/' . $config['template'] . '/');
-define('CSS_PATH', SKIN_PATH . 'css/');
-define('JS_PATH', SKIN_PATH . 'js/');
-
-define('SKIN_IMG', SKIN_PATH . 'images/');
-define('IMG_PATH', SITE_PATH.'statics/images/');
 
 if (defined('IS_DEBUG') && IS_DEBUG) {
 	$spConfig['mode'] = 'debug';
