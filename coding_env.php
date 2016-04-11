@@ -3,11 +3,11 @@
  * @Author: Xiyou
  * @Date:   2016-04-11 19:32:05
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-11 19:42:02
+ * @Last Modified time: 2016-04-11 21:09:17
  * @description
  */
 
-$VCAP_SERVICES = $_ENV['VCAP_SERVICES'];
+$VCAP_SERVICES = json_decode($_ENV['VCAP_SERVICES'],true);
 $MYSQL_INSTANCE  = $VCAP_SERVICES['mysql'][0]['credentials'];
 
 
