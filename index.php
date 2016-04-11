@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 09:47:06
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-09 15:51:17
+ * @Last Modified time: 2016-04-11 20:43:01
  */
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",APP_PATH.'/framework');
@@ -30,6 +30,8 @@ require_once(APP_PATH.'/common.inc.php');
 require(SP_PATH."/SpeedPHP.php");
 
 import('baseContoller.php');
+
+print_r($spConfig['db']);
 
 //启动应用
 spRun();
