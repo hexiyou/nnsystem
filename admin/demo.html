@@ -16,8 +16,13 @@
         <script type="text/javascript" src="include/config/editor_config.js"></script>
         <!-- 实例化编辑器 -->
         <script type="text/javascript">
-            var ue = UE.getEditor('container', EDITOR_OPTIONS
-        });
+            var ue = UE.getEditor('container', EDITOR_OPTIONS);
+            function getContent(){
+                var html = ue.getContent();
+                alert(html);
+            }
         </script>
+
+        <input type="button" value="提交测试" onclick="getContent()"/>
     </body>
 </html>
