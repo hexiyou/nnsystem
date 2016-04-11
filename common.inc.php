@@ -1,8 +1,8 @@
 <?php
-isset($db) && $spConfig['db'] = $db;
 if(IN_CODING && file_exists(APP_PATH.'/coding_env.php')){
     include(APP_PATH.'/coding_env.php');
 }
+isset($db) && $spConfig['db'] = $db;
 isset($view) && $spConfig['view'] = $view;
 isset($config) && define('TPL_DIR', $config['template'] . '/');
 define('SITE_PATH', $config['site_path'] != "" ? $config['site_path'] : '/');
