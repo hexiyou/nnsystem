@@ -1,5 +1,5 @@
 <?php
-if(IN_CODING && file_exists(APP_PATH.'/coding_env.php')){
+if(file_exists(APP_PATH.'/coding_env.php')){
     include(APP_PATH.'/coding_env.php');
 }
 isset($db) && $spConfig['db'] = $db;

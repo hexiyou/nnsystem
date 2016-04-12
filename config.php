@@ -3,13 +3,12 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 10:29:32
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-11 19:42:52
+ * @Last Modified time: 2016-04-12 09:59:38
  */
 
 // 系统全局配置文件
 // 
 define('IS_DEBUG',1);    //是否开启调试模式
-define('IN_CODING',true);  //是否托管在coding.net平台
 
 $config['template'] = 'default';  //网站模板目录
 $config['template_suffix'] = '.html';  //模板文件后缀，一般为html或htm
