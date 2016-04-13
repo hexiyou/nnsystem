@@ -18,7 +18,7 @@ function spRun(){
 		exit;
 	}
 	// 路由并执行用户代码
-	$handle_controller->$__action();
+	//$handle_controller->$__action();
 	// 控制器程序运行完毕，进行模板的自动输出
 	if(FALSE != $GLOBALS['G_SP']['view']['auto_display']){
 		$__tplname = $__controller.$GLOBALS['G_SP']['view']['auto_display_sep'].
