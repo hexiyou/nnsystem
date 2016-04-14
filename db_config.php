@@ -9,7 +9,7 @@
 $db = array();
 
 //  数据库配置信息
-$db['driver']     = 'mysql';   		// 驱动类型
+$db['driver']     = 'mysqli';   		// 驱动类型
 $db['host']       = 'localhost';              //数据库地址，一般都可以是localhost
 $db['port']       = 3306;        			// 端口
 $db['login']      = 'root';             //数据库用户名
