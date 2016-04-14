@@ -10,6 +10,9 @@ define('JS_PATH', 'template/js/'); //后台JS路径
 define('IMG_PATH', 'template/img/'); //后台引用图片路径
 define('IMGS_PATH', 'template/images/'); //后台引用图片路径2
 
+if(file_exists(APP_PATH.'/coding_env.php')){
+    include(APP_PATH.'/coding_env.php');
+}
 isset($db) && $spConfig['db'] = $db;
 $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . '/runtime/tmp';
