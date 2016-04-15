@@ -13,7 +13,7 @@ class main extends baseContoller
 	}
 
     function index() {
-        $this->display('index');
+        $this->display('index.html');
     }
 
     
