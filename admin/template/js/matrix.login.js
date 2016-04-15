@@ -41,7 +41,17 @@ $(document).ready(function(){
         });
     });
 
-        
-        
     }
+
+    /**后台登录表单校验**/
+    $('#loginform').submit(function(){
+        var username = $(this).find('input[name="username"]');
+        var password = $(this).find('input[name="password"]');
+
+        if($(username).val()==""||$(password).val()==""){
+                alert('用户名和密码不能为空!');
+                return false;
+        }
+        return true;
+    });
 });

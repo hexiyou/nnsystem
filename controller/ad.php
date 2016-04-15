@@ -1,11 +1,14 @@
 <?php
 /**
- * @Author: Xiyou
- * @Date:   2016-04-09 18:41:28
- * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-15 11:30:12
+ * @Author: Lonelyer <hackkey@qq.com>
+ * @link:  http://www.7s.com.cn
+ * @Date:   $DATE$ $TIME$
+ * @Last Modified time: 2016-04-15 11:25:15
+ * @Packages:   nnCMS
+ * @User:  $user$
+ * @File:  Filename()
+ * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
-
 class ad extends baseContoller
 {
     /**
@@ -22,7 +25,7 @@ class ad extends baseContoller
      * @return [type] [description]
      */
     public function index(){
-        print_r($this->db);
+        $this->display('ad');
     }
 
 
