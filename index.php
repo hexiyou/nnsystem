@@ -1,9 +1,11 @@
 <?php
 /**
- * @Author: Xiyou
- * @Date:   2016-04-07 09:47:06
- * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-11 21:16:33
+ * @Author: Lonelyer <hackkey@qq.com>
+ * @link:  http://www.7s.com.cn
+ * @Date:   2016-04-09 18:31:45
+ * @Last Modified time: 2016-04-15 11:25:15
+ * @Packages:   nnCMS
+ * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",APP_PATH.'/framework');

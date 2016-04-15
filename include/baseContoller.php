@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-09 11:32:08
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-14 15:35:45
+ * @Last Modified time: 2016-04-15 11:23:45
  */
 class baseContoller extends spController
 {
@@ -11,6 +11,7 @@ class baseContoller extends spController
 
 	function __construct()
 	{
+		global $__controller,$__action;
 		parent::__construct();
 		if($GLOBALS['G_C']['template_suffix']!=""){
 			$this->tpl_suffix = $GLOBALS['G_C']['template_suffix'];
@@ -18,6 +19,13 @@ class baseContoller extends spController
 		$this->__set_siteConfig(); //公共变量赋值
 		$this->seo();
 		if(IS_DEBUG) $this->enable_php_tag(TRUE);
+		// 自动载入控制器相匹配的数据模型
+        if(defined('AUTO_LOAD_MODEL')){
+        	$__model_path = $GLOBALS['G_SP']['model_path'].DSP .$__controller .'_model.php';
+        	if(AUTO_LOAD_MODEL && file_exists($__model_path)){
+        		$this->db = spClass($__controller.'_model',null,$__model_path);
+        	}
+        }
 	}
 
 

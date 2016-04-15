@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-09 18:41:28
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-13 10:01:39
+ * @Last Modified time: 2016-04-15 11:30:12
  */
 
 class ad extends baseContoller
@@ -14,6 +14,7 @@ class ad extends baseContoller
     public function __construct()
     {
         parent::__construct();
+
     }
 
     /**
@@ -21,7 +22,7 @@ class ad extends baseContoller
      * @return [type] [description]
      */
     public function index(){
-         $this->error();
+        print_r($this->db);
     }
 
 
@@ -43,11 +44,4 @@ class ad extends baseContoller
 
     }
 
-    /**
-     * [list description]
-     * @return [type] [description]
-     */
-    public function list(){
-        $this->display('index');
-    }
 }
