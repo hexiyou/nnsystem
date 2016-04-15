@@ -18,6 +18,10 @@ define('JS_PATH', SKIN_PATH . 'js/');
 define('SKIN_IMG', SKIN_PATH . 'images/');
 define('IMG_PATH', SITE_PATH . 'statics/images/');
 ////////////////////////////////////////////////////////////////////////
+
+$spConfig['controller_path'] = APP_PATH . DIRECTORY_SEPARATOR.'controller'; // 用户控制器程序的路径定义
+$spConfig['model_path'] = APP_PATH .DIRECTORY_SEPARATOR. 'model'; // 用户模型程序的路径定义
+
 $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . '/runtime/tmp'; //临时目录
 $spConfig['dispatcher_error'] = "import(SP_PATH.'/Misc/404.php');exit();"; //404错误页面

@@ -33,4 +33,15 @@ class ad_model extends spModel
     public function getOne(){
 
     }
+
+
+    public function order(){
+
+    }
+
+
+    public function test_parent()
+    {
+        echo 'This is parent contoller file';
+    }
 }

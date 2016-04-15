@@ -25,7 +25,8 @@ class ad extends baseContoller
      * @return [type] [description]
      */
     public function index(){
-        $this->display('ad');
+//        $this->display('ad');
+        echo $this->db->test_parent();
     }
 
 
