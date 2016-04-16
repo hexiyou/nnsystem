@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 15:23:26
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -11,17 +11,21 @@
  */
 
 /**
- * 搜索控制器
+ * 登录控制器
  *
  *
  */
-class search extends baseContoller{
+$user = spClass('user',null,$GLOBALS['G_SP']['controller_path'].'/user.php');
+class login extends user{
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    public function __autoload(){
+        
+    }
 
     public function getWhere()
     {
@@ -34,6 +38,16 @@ class search extends baseContoller{
     public function set()
     {
 
+    }
+
+    public function QR(){
+        spClass('QRcode')->img("http://www.speedphp.com"); 
+    }
+
+    public function oauth(){
+        $this->center;
+        $platform = $this->spArgs('p');
+        loadOauth($platform);
     }
 
 

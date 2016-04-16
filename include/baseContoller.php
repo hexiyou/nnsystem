@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-16 12:37:27
+ * @Last Modified time: 2016-04-16 15:26:04
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -11,12 +11,12 @@
  */
 
 /**
- * baseContoller 前台基础控制器类
- *
+ *  baseContoller 前台基础控制器类
  *
  *  前台所有控制器方法在此基础上继承拓展
+ *  
  */
-class baseContoller extends spController
+abstract class baseContoller extends spController
 {
     public $ctl_version = 'V1.0';
 
@@ -170,6 +170,15 @@ class baseContoller extends spController
                 $GLOBALS['G_SP']['view']['auto_display'] = $status;
         }
         return true;
+    }
+
+
+    /**
+     * [__toString 魔术方法，指明控制器用途]
+     * @return string [description]
+     */
+    public function __toString(){
+        return "nnCMS前端公共控制器";
     }
 
 }
