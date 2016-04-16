@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 12:03:45
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -35,7 +35,7 @@ class ad extends baseContoller
      * @return [type] [description]
      */
     public function show(){
-
+        print_r($GLOBALS);
     }
 
 

@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 11:55:08
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -11,30 +11,29 @@
  */
 
 /**
- *
- *    伯恩CMS后台管理入口文件
- *
- * 
- */
+  *
+  *    @author lonelyer <hackkey@qq.com>
+  * 
+  *    农年CMS后台管理入口文件
+  *    
+  */
 define('ADMIN_PATH',dirname(__FILE__)); //后台管理完整路径
 define("APP_PATH",dirname(ADMIN_PATH));
-define("SP_PATH",APP_PATH.'/framework');
+define("SP_PATH",APP_PATH.DIRECTORY_SEPARATOR.'framework');
+//各类数据和配置文件存储路径
+define('DATA_PATH', APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR); 
 
 // 载入数据库配置
-if(file_exists(APP_PATH.'/db_config.php')){
-	include_once(APP_PATH.'/db_config.php');
-}
+file_exists(DATA_PATH.'db_config.php') && include_once(DATA_PATH.'db_config.php');
 
 // 载入网站全局配置
-if(file_exists(APP_PATH.'/config.php')){
-	include_once(APP_PATH.'/config.php');
-}
+file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 
 //载入后台管理初始化文件
-require_once(ADMIN_PATH.'/common.inc.php');
+require_once(ADMIN_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 
 /** 载入框架 **/
-require(SP_PATH."/SpeedPHP.php");
+require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
 import($spConfig['controller_path'].DIRECTORY_SEPARATOR.'base.php',FALSE,TRUE);
 

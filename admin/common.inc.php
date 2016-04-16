@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 12:03:05
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -72,6 +72,10 @@ $view = array(
 	//'debugging' => TRUE   //模板变量调试
 );
 $spConfig['view'] = $view;
+
+// 载入拓展配置
+$spExtConfig = include_once(DATA_PATH.DIRECTORY_SEPARATOR.'ext_config.php');
+if($spExtConfig) $spConfig['ext'] = $spExtConfig['ext'];
 
 //GLOBAL variable $config 配置全局变量引用
 $G_C = $config;

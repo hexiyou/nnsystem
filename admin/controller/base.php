@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 12:36:03
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -49,6 +49,7 @@ class base extends spController
 
 
     /**
+     * 设置在否自动调用模板显示
      * @param string $status
      * @return bool
      */
@@ -64,9 +65,7 @@ class base extends spController
             default:
                 $GLOBALS['G_SP']['view']['auto_display'] = $status;
         }
-
         return true;
-
     }
 
     /**

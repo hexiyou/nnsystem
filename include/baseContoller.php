@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-16 12:37:27
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -37,6 +37,10 @@ class baseContoller extends spController
                 import($__model_path, false);
                 class_exists($__controller . '_model') && $this->db = spClass($__controller . '_model', null, $__model_path);
             }
+        }
+        //是否自动调用模板
+        if (isset($this->auto_display) && false === $this->auto_display) {
+            $this->setAutoDisplay('OFF');
         }
     }
 
@@ -145,6 +149,27 @@ class baseContoller extends spController
             require($tplname);
         }
         if (TRUE != $output) return ob_get_clean();
+    }
+
+
+    /**
+     * 设置在否自动调用模板显示
+     * @param string $status
+     * @return bool
+     */
+    public function setAutoDisplay($status = 'ON')
+    {
+        switch ($status) {
+            case "ON":
+                $GLOBALS['G_SP']['view']['auto_display'] = TRUE;
+                break;
+            case "OFF":
+                $GLOBALS['G_SP']['view']['auto_display'] = FALSE;
+                break;
+            default:
+                $GLOBALS['G_SP']['view']['auto_display'] = $status;
+        }
+        return true;
     }
 
 }

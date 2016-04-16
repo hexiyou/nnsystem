@@ -59,7 +59,7 @@ if ($config['url_rewrite'] == TRUE) {
 if (isset($config['template']) && !empty($config['template'])) {
     $spConfig['view']['config']['template_dir'].= trim($config['template']) . '/';
     
-    $spConfig['dispatcher_error'] = "import(\$GLOBALS['G_SP']['controller_path'].DIRECTORY_SEPARATOR.'error_404.php');\$handle=spClass('error_404');\$handle->handle(\$__controller,\$__action);;exit();"; //404错误页面
+    $spConfig['dispatcher_error'] = "import(\$GLOBALS['G_SP']['controller_path'].DIRECTORY_SEPARATOR.'error_404.php');\$handle=spClass('error_404');\$handle->handle(\$__controller,\$__action);exit();"; //404错误页面
     //自动加载模板
     $spConfig['view']['auto_display'] = TRUE;
      // 是否使用自动输出模板功能
@@ -69,6 +69,10 @@ if (isset($config['template']) && !empty($config['template'])) {
      // 自动输出模板的后缀名
     
 }
+
+// 载入拓展配置
+$spExtConfig = include_once(DATA_PATH.DIRECTORY_SEPARATOR.'ext_config.php');
+if($spExtConfig) $spConfig['ext'] = $spExtConfig['ext'];
 
 //GLOBAL variable $config 配置全局变量引用
 $G_C = $config;
