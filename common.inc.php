@@ -1,5 +1,6 @@
 <?php
-@include(APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'define.php');
+include(APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'define.php');
+include(APP_PATH.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'global.php');
 if(file_exists(APP_PATH.DSP.'coding_env.php')){
     include(APP_PATH.DSP.'coding_env.php');
 }

@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-09 16:49:26
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-16 14:02:34
+ * @Last Modified time: 2016-04-16 19:22:16
  */
 /**
  * summary
@@ -27,6 +27,10 @@ class user extends baseContoller
 
 
     public function login(){
-    	$this->display('login.html');
+    	$this->display('login');
+    }
+
+    public function register(){
+        $this->display('register');
     }
 }

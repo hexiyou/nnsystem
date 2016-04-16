@@ -1,12 +1,32 @@
 <?php
 /**
- * @Author: Lonelyer <hackkey@qq.com>
- * @link:  http://www.7s.com.cn
- * @Date:   2016-04-07 11:33:14
- * @Last Modified time: 2016-04-16 15:38:12
- * @Packages:   nnCMS
- * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
+ *  全局函数库  在APP启动前 common.inc.php 中载入
+ *
+ *  $file  global.php
+ *
+ *  generate by lonelyer <hackkey@qq.com>
  */
+
+/**
+ * [自动载入函数类库]
+ * 路径查找顺序 model_path->contoller_path->include_path
+ * @param  [string] $className [要加载的类名]
+ * @return [booens]        [是否成功载入类库]
+ */
+function __autoload($class) {
+	if (is_file($GLOBALS['G_SP']['model_path'] . DIRECTORY_SEPARATOR . $class . '.php')) {
+		import($GLOBALS['G_SP']['model_path'] . DIRECTORY_SEPARATOR . $class . '.php');
+		return true;
+	} elseif (is_file($GLOBALS['G_SP']['controller_path'] . DIRECTORY_SEPARATOR . $class . '.php')) {
+		import($GLOBALS['G_SP']['controller_path'] . DIRECTORY_SEPARATOR . $class . '.php');
+		return true;
+	} elseif (INC_PATH . $class . '.php') {
+		import(INC_PATH . $class . '.php');
+		return true;
+	} else {
+		return false;
+	}
+}
 
 /**
  * [spGetUrl Smarty注册spUrl函数]
@@ -20,7 +40,19 @@ function spGetUrl($param) {
 	return spUrl($controller, $action, $params);
 }
 
+/**
+ * [show_QRImg 显示二维码]
+ * @param  [type] $context [description]
+ * @return [type]          [description]
+ */
+function show_QRImg($context){
+  return spClass('QRcode')->img($context); 
+}
 
+/**
+ * [_email 测试邮件发送]
+ * @return [type] [description]
+ */
 function _email() {
 	$mail = spClass('spEmail');
 	$mailsubject = "SpeedPHP邮件扩展"; //邮件主题
@@ -29,15 +61,11 @@ function _email() {
 	$mail->sendmail('收件人邮箱@email.com', $mailsubject, $mailbody, $mailtype);
 }
 
-
-public function __autoload($class_name){
-	import($class_name.'.php');
-	throw new Exception("Unable to load $class_name.");
-}
-
-function loadOauth($platform="qq"){
-	$connectFile  = APP_PATH.'/include/oauth/'.$platform.'_connect.php';
-	if(file_exists($connectFile)){
-		require_once($connectFile);
+function loadOauth($platform = "qq") {
+	$connectFile = APP_PATH . '/include/oauth/' . $platform . '_connect.php';
+	if (file_exists($connectFile)) {
+		require_once $connectFile;
 	}
 }
+
+function_exists('spl_autoload_register') && spl_autoload_register('__autoload');
