@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-16 15:26:04
+ * @Last Modified time: 2016-04-18 10:23:37
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -54,6 +54,22 @@ abstract class baseContoller extends spController
         $this->__set('CFG', $GLOBALS['G_C']); //config.php 配置项赋值
         $this->site_name = $GLOBALS['G_C']['site_name'];
         $this->site_url = $GLOBALS['G_C']['site_url'];
+        $this->assignConst();
+    }
+
+
+     /**
+     *  赋值常用模板变量
+     * @author hexiyou.cn@gmail.com
+     *
+     */
+    public function assignConst()
+    {
+        $this->__set('TPL_PATH',TPL_PATH);
+        $this->__set('CSS_PATH', CSS_PATH);
+        $this->__set('JS_PATH', JS_PATH);
+        $this->__set('IMG_PATH', IMG_PATH);
+        $this->__set('IMGS_PATH', IMGS_PATH);
     }
 
     /**

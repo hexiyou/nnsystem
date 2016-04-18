@@ -2,15 +2,16 @@
 /**
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
- * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-18 10:59:23
+ * @Date:   2016-04-18 10:14:32
+ * @Last Modified time: 2016-04-18 10:46:51
  * @Packages:   nnCMS
- * @User:  $user$
- * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 
-class category extends base{
+class product extends baseContoller
+{
+    
+	public $page_title = "产品详情";
 
     public function __construct()
     {
@@ -19,8 +20,11 @@ class category extends base{
 
 
     public function index(){
-
-        $this->display('category');
+    	$this->display('product');
     }
 
+
+    public function full(){
+
+    }
 }

@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-09 18:31:45
- * @Last Modified time: 2016-04-16 11:48:38
+ * @Last Modified time: 2016-04-18 10:31:49
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -25,7 +25,7 @@ file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 require_once(APP_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 
 /** 载入框架 **/
-require(SP_PATH."/SpeedPHP.php");
+require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
 import('baseContoller.php');
 
