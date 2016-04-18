@@ -28,6 +28,6 @@ require_once(APP_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
 import('baseContoller.php');
-
+//IDE上推送，测试冲突合并
 //启动应用
 spRun();
