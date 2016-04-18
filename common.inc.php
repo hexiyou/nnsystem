@@ -12,6 +12,7 @@ isset($config) && define('TPL_DIR', $config['template'] . DSP);
 define('SITE_PATH', $config['site_path'] != "" ? $config['site_path'] : '/');
 define('TPL_TRUE_PATH', APP_PATH.DSP.'template'.DSP.TPL_DIR);//模板真实路径
 
+define('TPL_PATH', '/template/'. $config['template'].'/');
 define('SKIN_PATH', SITE_PATH . 'skin/' . $config['template'] . '/'); // 定义SKIN PATH
 define('CSS_PATH', SKIN_PATH . 'css/');
 define('JS_PATH', SKIN_PATH . 'js/');
@@ -38,6 +39,7 @@ if ($config['url_rewrite'] == TRUE) {
 			'index' => 'main@index',
 			'user'   => 'user@login',
 			'login'  => 'user@login',
+            'category'=>'category@clist',
 			'@'    => 'error_404', 
      	), 
      	'args' 	=> array(
