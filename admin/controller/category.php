@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-18 10:59:23
+ * @Last Modified time: 2016-04-19 19:14:33
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -20,7 +20,7 @@ class category extends base{
 
     public function index(){
 
-        $this->display('category');
+        $this->display('category.html');
     }
 
 }
