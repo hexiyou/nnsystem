@@ -86,22 +86,45 @@ class spUrlRewrite
 			$__action = $GLOBALS['G_SP']['default_action'];
 			return ;
 		}
+		//request_uri 去除 contoller 和 action 之外的请求字符串
 		$request = explode((( '' == $this->params['suffix'] )?'?':$this->params['suffix']), $request, 2);
 		$uri = array('first' => array_shift($request),'last' => ltrim(implode($request),'?'));
 		$request = explode($this->params['sep'], $uri['first']);
+		$base_controller = isset($request[0])?$request[0]:$GLOBALS['G_SP']['default_controller'];
+		$suffix_pattern = isset($request[1])?$request[1]:'';
+		$fulluri = $request[0].$this->params['sep'].$suffix_pattern;
 		$uri['first'] = array('pattern' => array_shift($request),'args'  => $request);
-		
+		// 匹配具名路由映射，不包含@
 		if( array_key_exists($uri['first']['pattern'], $this->params['map']) ){
 			@list($__controller, $__action) = explode('@',$this->params['map'][$uri['first']['pattern']]);
 			if( !empty($this->params['args'][$uri['first']['pattern']]) )foreach( $this->params['args'][$uri['first']['pattern']] as $v )spClass("spArgs")->set($v, array_shift($uri['first']['args']));
+
 		}elseif( isset($this->params['map']['@']) && !in_array($uri['first']['pattern'].'.php', array_map('strtolower',scandir($GLOBALS['G_SP']['controller_path']))) ){
 			@list($__controller, $__action) = explode('@',$this->params['map']['@']);
 			if( !empty($this->params['args']['@']) ){
 				$uri['first']['args'] = array_merge(array($uri['first']['pattern']), $uri['first']['args']);
 				foreach( $this->params['args']['@'] as $v )spClass("spArgs")->set($v, array_shift($uri['first']['args']));
 			}
-		}else{
-			$__controller = $uri['first']['pattern'];$__action = array_shift($uri['first']['args']);
+		}else{//未具名匹配，且不含@标记  file modified by lonelyer <hackkey@qq.com>
+			$urlHasMatch = false;
+			foreach ($this->params['map'] as $mapKey => $mapVal) {
+				$_mapKey = str_replace('<c>','.*',$mapKey);
+				if(preg_match('#'.$_mapKey.'#i',$fulluri)){
+					$urlHasMatch = true;
+					@list($__controller, $__action) = explode('@',$this->params['map'][$mapKey]);
+					// 匹配map映射控制器为*的情况
+					if($__controller=="*"||$__controller=="<c>"){
+						$__controller = $base_controller;
+					}
+					if(!empty($this->params['args'][$uri['first']['pattern']]) )foreach( $this->params['args'][$uri['first']['pattern']] as $v )spClass("spArgs")->set($v, array_shift($uri['first']['args']));
+					$virtual_action = array_shift($uri['first']['args']); //URI虚action
+				 	break;
+				}
+			}
+			if($urlHasMatch==false){
+				$__controller = $uri['first']['pattern'];
+				$__action = array_shift($uri['first']['args']);
+			}
 			if( empty($__action) )$__action = $GLOBALS['G_SP']['default_action'];
 		}
 		if(!empty($uri['first']['args']))for($u = 0; $u < count($uri['first']['args']); $u++){

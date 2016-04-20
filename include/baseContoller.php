@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 14:07:06
+ * @Last Modified time: 2016-04-20 17:47:20
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -89,6 +89,25 @@ abstract class baseContoller extends spController
             $this->show_title = $this->title;
         }
 
+    }
+
+
+    /**
+     * [getHeaderStr 获取模板公共头部内容，返回字符串]
+     * @return [String] [模板内容]
+     */
+    public function getHeaderStr(){
+        $header=$this->display('header',FALSE);
+        $header_sub=$this->display('header_sub',FALSE);
+        return $header.$header_sub;
+    }
+
+    /**
+     * [getFooterStr 获取底部模板字符串内容]
+     * @return [type] [description]
+     */
+    public function getFooterStr(){
+        return $this->display('footer',FALSE);
     }
 
 

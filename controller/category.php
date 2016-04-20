@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-09 18:59:47
- * @Last Modified time: 2016-04-20 14:37:04
+ * @Last Modified time: 2016-04-20 17:04:30
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -22,11 +22,10 @@ class category extends baseContoller
 	}
 
 	public function grid(){
-		echo "1111";
 		$this->display('category-grid');
 	}
 
-	public function listAction(){
+	public function list_action(){
 		$this->display('category_list');
 	}
 }
