@@ -31,22 +31,6 @@ $spConfig['dispatcher_error'] = "import(SP_PATH.'/Misc/404.php');exit();"; //404
 
 // 根据全局配置项判断是否开启伪静态
 if ($config['url_rewrite'] == TRUE) {
-    $spConfig['spUrlRewrite'] = array(
-    // 'suffix' => '.html',
-		'suffix' => '', 
-		'sep'    => '-',
-		'map'    => array(
-			'index' => 'main@index',
-			'user'   => 'user@login',
-			'login'  => 'user@login',
-            'category'=>'category@clist',
-			'@'    => 'error_404', 
-     	), 
-     	'args' 	=> array(
-     		 'search' => array('q','page'), 
-     		),
-     	);
-    
     $spConfig['launch'] = array(
      // 加入挂靠点，以便开始使用Url_ReWrite的功能
     'router_prefilter' => array(array('spUrlRewrite', 'setReWrite'),
@@ -55,7 +39,28 @@ if ($config['url_rewrite'] == TRUE) {
      // 开启有限的权限控制
     ), 'function_url' => array(array("spUrlRewrite", "getReWrite"),
      // 对spUrl进行挂靠，让spUrl可以进行Url_ReWrite地址的生成
-    ),);
+    ));
+
+    // URL 重写路由映射配置
+    $spConfig['ext']['spUrlRewrite'] = array(
+        //'suffix' => '.html',
+        'suffix' => '', 
+        'sep'    => '-',
+        'map'    => array(
+            'index'         => 'main@index',
+            'login'         => 'user@login',
+            'logout'        => 'user@logout',
+            'category-list' => 'category@listAction',
+            'category-*' => 'category@__empty',
+            //'<c>-list'=>'<c>@list_action',
+            //'category-@' => 'category@__empty',
+            //'@'    => 'error_404_bak', 
+        ), 
+        'args'  => array(
+             'search' => array('q','page'), 
+            ),
+    );
+    
 }
 
 //识别当前配置模板配置项，自动补全模板路径
@@ -75,7 +80,7 @@ if (isset($config['template']) && !empty($config['template'])) {
 
 // 载入拓展配置
 $spExtConfig = include_once(DATA_PATH.DIRECTORY_SEPARATOR.'ext_config.php');
-if($spExtConfig) $spConfig['ext'] = $spExtConfig['ext'];
+if($spExtConfig) $spConfig['ext'] += $spExtConfig['ext']; //拓展配置变量组合
 
 //GLOBAL variable $config 配置全局变量引用
 $G_C = $config;

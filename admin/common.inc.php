@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 11:45:44
+ * @Last Modified time: 2016-04-20 13:52:40
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -34,16 +34,6 @@ $spConfig['include_path'][] = ADMIN_PATH . DIRECTORY_SEPARATOR.'lib';
 // 判断是否开启URL重写
 
 if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
-	$spConfig['spUrlRewrite'] = array(
-		'suffix' => '.html',
-		'sep' => '-',
-		'map' => array(
-			'index' => 'main@index',
-			'login' => 'user@login',
-			'@'     => 'main@index',
-		),
-		'args' => array(),
-	);
 
 	$spConfig['launch'] = array( // 加入挂靠点，以便开始使用Url_ReWrite的功能
 		'router_prefilter' => array(
@@ -53,6 +43,17 @@ if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 		'function_url' => array(
 			array("spUrlRewrite", "getReWrite"), // 对spUrl进行挂靠，让spUrl可以进行Url_ReWrite地址的生成
 		),
+	);
+
+	$spConfig['ext']['spUrlRewrite'] = array(
+		'suffix' => '.html',
+		'sep' => '-',
+		'map' => array(
+			'login' => 'user@login',
+			'logout' => 'user@logout',
+			//'@'     => 'error_404@handle',
+		),
+		'args' => array(),
 	);
 }
 
@@ -77,7 +78,7 @@ $spConfig['view'] = $view;
 
 // 载入拓展配置
 $spExtConfig = include_once(DATA_PATH.DIRECTORY_SEPARATOR.'ext_config.php');
-if($spExtConfig) $spConfig['ext'] = $spExtConfig['ext'];
+if($spExtConfig) $spConfig['ext'] += $spExtConfig['ext']; //将URL重写配置与其他拓展配置组合
 
 //GLOBAL variable $config 配置全局变量引用
 $G_C = $config;

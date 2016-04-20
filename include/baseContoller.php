@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-18 10:23:37
+ * @Last Modified time: 2016-04-20 14:07:06
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -186,6 +186,13 @@ abstract class baseContoller extends spController
                 $GLOBALS['G_SP']['view']['auto_display'] = $status;
         }
         return true;
+    }
+
+
+    public function __empty(){
+        global $__controller,$__action;
+        echo $__controller.'没有发现方法'.$__action;
+        exit();
     }
 
 
