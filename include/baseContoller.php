@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 17:47:20
+ * @Last Modified time: 2016-04-20 18:45:29
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -207,7 +207,10 @@ abstract class baseContoller extends spController
         return true;
     }
 
-
+    /**
+     * [__empty 控制器默认空方法]
+     * @return [type] [description]
+     */
     public function __empty(){
         global $__controller,$__action;
         echo $__controller.'没有发现方法'.$__action;

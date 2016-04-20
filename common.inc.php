@@ -52,7 +52,6 @@ if ($config['url_rewrite'] == TRUE) {
             'register' => 'user@register',
             'logout'   => 'user@logout',
             '<c>-list' => '<c>@list_action',
-            'category-*' => 'category@__empty',
             //'<c>-list'=>'<c>@list_action',
             //'category-@' => 'category@__empty',
             //'@'    => 'error_404_bak', 

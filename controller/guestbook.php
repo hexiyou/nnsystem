@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-15 11:25:15
+ * @Last Modified time: 2016-04-20 18:39:50
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -22,6 +22,7 @@ class guestBook extends baseContoller
 
 	public function index()
 	{
+		$this->head_title="欢迎使用留言簿";
 		$this->display('guestbook');
 	}
 

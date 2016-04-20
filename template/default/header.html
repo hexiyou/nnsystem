@@ -65,7 +65,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">	
+									<a href="<{spUrl c="order"}>">	
 										<i class="fa fa-heart hidden-lg hidden-md" title="Wish List"></i>
 										<span class="hidden-sm hidden-xs">
 											列表清单 (0)
@@ -73,7 +73,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="<{spUrl c="user"}>">
 										<i class="fa fa-user hidden-lg hidden-md" title="My Account"></i>
 										<span class="hidden-sm hidden-xs">
 											我的账户
@@ -152,7 +152,7 @@
 					<div class="col-md-3 col-xs-12">
 						<div id="search">
 							<div class="input-group">
-							  <input type="text" class="form-control input-lg" placeholder="Search">
+							  <input type="text" class="form-control input-lg" placeholder="搜素">
 							  <span class="input-group-btn">
 								<button class="btn btn-lg" type="button">
 									<i class="fa fa-search"></i>
@@ -168,7 +168,7 @@
 							<button type="button" data-toggle="dropdown" class="btn btn-block btn-lg dropdown-toggle">
 								<i class="fa fa-shopping-cart"></i>
 								<span class="hidden-md">购物车:</span> 
-								<span id="cart-total">2 item(s) - ￥340.00</span>
+								<span id="cart-total">2 件 - ￥340.00</span>
 								<i class="fa fa-angle-down"></i>
 							</button>
 							<ul class="dropdown-menu pull-right">
@@ -176,12 +176,12 @@
 									<table class="table hcart">
 										<tr>
 											<td class="text-center">
-												<a href="product.html">
-													<img src="images/product-images/hcart-thumb1.jpg" alt="image" title="image" class="img-thumbnail img-responsive" />
+												<a href="<{spUrl c="product"}>">
+													<img src="<{$smarty.const.IMG_PATH}>product-images/hcart-thumb1.jpg" alt="image" title="image" class="img-thumbnail img-responsive" />
 												</a>
 											</td>
 											<td class="text-left">
-												<a href="product-full.html">
+												<a href="<{spUrl c="product" a="full"}>">
 													电脑
 												</a>
 											</td>
@@ -236,7 +236,7 @@
 										</tbody>
 									</table>
 									<p class="text-right btn-block1">
-										<a href="cart.html">
+										<a href="<{spUrl c="cart"}>">
 											查看购物车
 										</a>
 										<a href="#">
