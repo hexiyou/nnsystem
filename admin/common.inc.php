@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-16 12:03:05
+ * @Last Modified time: 2016-04-20 11:45:44
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -33,12 +33,14 @@ $spConfig['include_path'][] = ADMIN_PATH . DIRECTORY_SEPARATOR.'lib';
 
 // 判断是否开启URL重写
 
-if ($config['url_rewrite'] == 1) {
+if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 	$spConfig['spUrlRewrite'] = array(
 		'suffix' => '.html',
 		'sep' => '-',
 		'map' => array(
+			'index' => 'main@index',
 			'login' => 'user@login',
+			'@'     => 'main@index',
 		),
 		'args' => array(),
 	);
@@ -86,8 +88,26 @@ $G_C = $config;
 $spConfig['controller_path'] = ADMIN_PATH . DIRECTORY_SEPARATOR.'controller'; // 用户控制器程序的路径定义
 $spConfig['model_path'] = ADMIN_PATH .DIRECTORY_SEPARATOR. 'model'; // 用户模型程序的路径定义
 
-
-$spConfig['dispatcher_error'] = "import(\$GLOBALS['G_SP']['controller_path'].DIRECTORY_SEPARATOR.'error_404.php');\$handle=spClass('error_404');\$handle->handle(\$__controller,\$__action);;exit();"; //404错误页面
+// 后台管理控制器错误处理句柄
+$spConfig['dispatcher_error'] = <<<EOF
+\$handle_param = array(
+array(
+	'params'=>array(
+		'__controller'=>\$GLOBALS['__controller'],
+		'__action'=>\$GLOBALS['__action'],
+		'php_errormsg'=>\$GLOBALS['php_errormsg'],
+		'mode'=>\$GLOBALS['spConfig']['mode'],
+),
+	'_SERVER'=>\$GLOBALS['_SERVER'],
+	'view'=>\$GLOBALS['view'],
+	'config'=>\$GLOBALS['config'],
+	'spConfig'=>\$GLOBALS['spConfig'],
+));
+import(\$GLOBALS['G_SP']['controller_path'].DIRECTORY_SEPARATOR.'error_404.php');
+\$handle=spClass('error_404',\$handle_param);
+\$handle->handle(\$__controller,\$__action);
+exit();
+EOF;
 
 if (defined('IS_DEBUG') && IS_DEBUG) {
 	$spConfig['mode'] = 'debug';

@@ -15,10 +15,20 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Sample pages</a> <a href="#" class="current">Error</a> </div>
+    <div id="breadcrumb"> <a href="#" title="返回主页" class="tip-bottom"><i class="icon-home"></i> 主页</a> <a href="#">Sample pages</a> <a href="#" class="current">错误</a> </div>
     <h1>Error 404</h1>
   </div>
   <div class="container-fluid">
+  {if $smarty.const.IS_DEBUG==TRUE}
+      {php}
+      $tpl_vars = $GLOBALS['G_SP']['inst_class']['spView']->engine->tpl_vars;
+      extract($tpl_vars['params']->value);
+      //print_r($tpl_vars['params']->value);
+      echo '<h2>'.$__controller.'-> '.$__action.'</h2>';
+      spError("404错误  ".$__controller." -> ".$__action,TRUE,FALSE);
+      {/php}
+  {else}
+  <!-- normal error information -->
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
@@ -35,6 +45,8 @@
         </div>
       </div>
     </div>
+    <!-- error information end -->
+    {/if}
   </div>
 </div>
 <!--Footer-part-->
