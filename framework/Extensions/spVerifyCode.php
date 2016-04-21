@@ -23,15 +23,15 @@ class spVerifyCode {
 
 	private $vc_session = NULL;
 
-	public function  __construct() {
+	public function  __construct($width=null,$height=null,$length=null,$type=null) {
 		$this->font = str_replace('\\', '/', dirname(__FILE__)).'/font.ttf';
 		$this->vc_session = &$_SESSION[$GLOBALS['G_SP']['sp_app_id']]['verifycode'];
 
 		$params = spExt('spVerifyCode');
 		if( !empty($params['width']) )$this->width = $params['width'];
 		if( !empty($params['height']) )$this->height = $params['height'];
-		if( !empty($params['length']) )$this->len = $params['length'];
-		if( !empty($params['bgcolor']) )$this->backcolor = $params['bgcolor'];
+		if(	!empty($params['length']) )$this->len = $params['length'];
+		if(	!empty($params['bgcolor']) )$this->backcolor = $params['bgcolor'];
 		if( !empty($params['noisenum']) )$this->noisenum = $params['noisenum'];
 		if( !empty($params['fontsize']) )$this->textsize = $params['fontsize'];
 		if( !empty($params['fontfile']) ){
@@ -42,6 +42,11 @@ class spVerifyCode {
 			}
 		}
 		if( !empty($params['format']) )$this->format = strtolower($params['format']);
+		// 新实例初始化参数
+		if($width!=null)   $this->width = $width;
+		if($height!=null)   $this->height= $height;
+		if($length!=null)  $this->len = $length;
+		if($type!=null)    $this->format = $type;
 	}
 
 	public function display() {

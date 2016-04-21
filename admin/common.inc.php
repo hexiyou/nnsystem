@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 13:52:40
+ * @Last Modified time: 2016-04-21 16:55:27
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -29,10 +29,9 @@ $spConfig['sp_cache'] = APP_PATH . DIRECTORY_SEPARATOR.'runtime'.DIRECTORY_SEPAR
 
 //附加类库路径
 $spConfig['include_path'][] = ADMIN_PATH . DIRECTORY_SEPARATOR.'lib';
-
+$spConfig['ext'] = array();   //载入拓展配置前初始化其配置为空数组
 
 // 判断是否开启URL重写
-
 if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 
 	$spConfig['launch'] = array( // 加入挂靠点，以便开始使用Url_ReWrite的功能
@@ -46,7 +45,7 @@ if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 	);
 
 	$spConfig['ext']['spUrlRewrite'] = array(
-		'suffix' => '.html',
+		'suffix' => isset($config['url_suffix'])&&$config['url_suffix']!=""?$config['url_suffix']:"",
 		'sep' => '-',
 		'map' => array(
 			'login' => 'user@login',

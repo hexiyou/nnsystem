@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 10:29:32
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-20 12:47:53
+ * @Last Modified time: 2016-04-21 16:56:49
  */
 
 // 系统全局配置文件
@@ -12,7 +12,8 @@ define('IS_DEBUG',1);    //是否开启调试模式
 
 $config['template'] = 'default';  //网站模板目录
 $config['template_suffix'] = '.html';  //模板文件后缀，一般为html或htm
-$config['url_rewrite'] = 1 ;   //是否开启URL重写，0关闭，1开启
+$config['url_rewrite'] = 0 ;   //是否开启URL重写，0关闭，1开启
+$config['url_suffix'] = '';  //URL重写伪后缀，可以为任意字符或留空
 $config['domain'] = 'www.sp.com';   //域名配置
 $config['site_name'] = '农年科技管理系统';  //站点名称
 $config['site_path'] = '/';
