@@ -12,6 +12,9 @@ function spRun(){
 	spLaunch("router_prefilter");
 	// 对将要访问的控制器类进行实例化
 	$handle_controller = spClass($__controller, null, $GLOBALS['G_SP']["controller_path"].'/'.$__controller.".php");
+	if(defined('LIST_ALIAS_ACTION') && $__action == "list"){
+		$__action = LIST_ALIAS_ACTION;
+	}
 	// 调用控制器出错将调用路由错误处理函数
 	if(!is_object($handle_controller) || !method_exists($handle_controller, $__action)){
 		eval($GLOBALS['G_SP']["dispatcher_error"]);
