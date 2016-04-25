@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-09 18:31:45
- * @Last Modified time: 2016-04-18 10:31:49
+ * @Last Modified time: 2016-04-25 12:11:34
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -33,6 +33,6 @@ if(file_exists(APP_PATH.DSP.'sae_env.php')){
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
 import('baseContoller.php');
-//IDE上推送，测试冲突合并
+
 //启动应用
 spRun();

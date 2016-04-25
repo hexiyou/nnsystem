@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 18:45:29
+ * @Last Modified time: 2016-04-25 11:53:06
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -69,7 +69,7 @@ abstract class baseContoller extends spController
         $this->__set('CSS_PATH', CSS_PATH);
         $this->__set('JS_PATH', JS_PATH);
         $this->__set('IMG_PATH', IMG_PATH);
-        $this->__set('IMGS_PATH', IMGS_PATH);
+        $this->__set('IMGS_PATH', SKIN_IMG);
     }
 
     /**
@@ -79,8 +79,8 @@ abstract class baseContoller extends spController
     public function seo()
     {
         $this->title = $this->page_title . ' - ' . $this->site_name;
-        $this->keywords = $this->CFG['keywords'];
-        $this->description = $this->CFG['description'];
+        $this->keywords = $this->CFG['site_keywords'];
+        $this->description = $this->CFG['site_description'];
         $this->author = '7s.com.cn';
         //是否展示 SEO标题
         if (isset($this->seo_title) && !empty($this->seo_title)) {

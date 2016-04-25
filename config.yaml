@@ -1,0 +1,5 @@
+name: nnsystem
+version: 1
+
+handle:
+- rewrite: if (!-d && !-f) goto "/index.php?%{QUERY_STRING}"
