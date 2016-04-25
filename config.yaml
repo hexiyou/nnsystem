@@ -3,3 +3,5 @@ version: 1
 
 handle:
 - rewrite: if (!-d && !-f) goto "/index.php?%{QUERY_STRING}"
+- directoryindex: index.html index.htm index.php
+- expire: if (%{REQ:REFERER} ~ "sina") time 10
