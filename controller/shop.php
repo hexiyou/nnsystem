@@ -16,7 +16,19 @@ class shop extends baseContoller
 		parent::__construct();
 	}
 
-	public fucntion index(){
+	public function index(){
 		
 	}
+	
+	
+	public function __empty(){
+	    
+	}
+	
+	
+	public function getshipInfo(){
+	    
+	    
+	}
+	
 }

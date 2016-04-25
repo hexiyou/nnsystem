@@ -32,6 +32,11 @@ file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 //载入后台管理初始化文件
 require_once(ADMIN_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 
+//载入新浪云平台环境配置文件
+if(file_exists(APP_PATH.DSP.'sae_env.php')){
+    include(APP_PATH.DSP.'sae_env.php');
+}
+
 /** 载入框架 **/
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
