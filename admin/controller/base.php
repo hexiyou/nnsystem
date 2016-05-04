@@ -3,18 +3,18 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-16 12:36:03
+ * @Last Modified time: 2016-05-04 20:39:31
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
-
+defined('IN_APP') or exit('Access Denied!');
 /**
  * Class base
- * @desscription 后台管理基础控制类
+ * @desscription 后台管理基础控制类,抽象类，被继承
  */
-class base extends spController
+abstract class base extends spController
 {
     public $version = 'V1.0';
 
@@ -22,25 +22,36 @@ class base extends spController
 
     public $name = "nnCMS backend manage conntoller";
 
-
-
     public $no_author_contollers = array(
         'error_404',
         'login'
 
-
     );//不需要登录验证的controller
 
 
+    public $addCss= array();//在header前附加的CSS
+
+    public $insertJS = array(); //在header前插入的CSS
+
+    public $appendJS = array();  //在页脚附加的JS文件
 
     /**
      * base constructor.
      */
     public function __construct()
     {
+        global $__controller, $__action;
         parent::__construct();
         $this->enable_php_tag(TRUE); // 启用PHP标签
         $this->setAutoDisplay('ON'); //设置模板自动显示
+        // 自动载入控制器相匹配的数据模型
+        if (defined('AUTO_LOAD_MODEL')) {
+            $__model_path = $GLOBALS['G_SP']['model_path'] . DSP . $__controller . '_model.php';
+            if (AUTO_LOAD_MODEL && file_exists($__model_path)) {
+                import($__model_path, false);
+                class_exists($__controller . '_model') && $this->db = spClass($__controller . '_model', null, $__model_path);
+            }
+        }
         $this->checkLogin(); //检查是否登录
         $this->checkPrivilege(); //检查是否有权限
         $this->autoSetVal(); //自动初始化参数
@@ -93,6 +104,8 @@ class base extends spController
         }
         $title = isset($this->title)?$this->title:"";
         $this->assign('title',$title);
+        $this->assign('__controller',$GLOBALS['__controller']);
+        $this->assign('__action',$GLOBALS['__action']);
         ## coding
     }
 
@@ -197,6 +210,15 @@ class base extends spController
         }
     }
 
+    /**
+     * [setPageSize cookie设置每页步长]
+     * @param [type] $itemName [description]
+     * @param [type] $itemVal  [description]
+     */
+    public function setPageSize($itemName,$itemVal){
+        return set_cookie($itemName,$itemVal,'1d');
+    }
+
 
     /**
      *  检查用户是否登录
@@ -205,6 +227,22 @@ class base extends spController
     public function checkLogin()
     {
         return false;
+    }
+
+    /**
+     * [_getUserInfo 获取当前登录管理员用户信息]
+     * @return [type] [description]
+     */
+    public function _getUserInfo(){
+        $uid = get_cookie('uid');
+        if(!$uid) return false;
+        $_model = spClass('user_model');
+        return $_model->getUserByID($uid);
+    }
+
+
+    public function _checkUserLogin(){
+
     }
 
     /**

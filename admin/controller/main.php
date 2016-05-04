@@ -3,13 +3,14 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-04-20 10:48:28
+ * @Last Modified time: 2016-04-30 10:53:33
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 /**后台管理入口**/
 class main extends base
 {
+    public $page_title = '后台管理首页';
 
     public function __construct(){
         parent::__construct();

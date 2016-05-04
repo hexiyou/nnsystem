@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="cn">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8"/>
+        <title>{if $title}{$title}{else}{$page_title}-{$site_name}{/if}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}bootstrap.min.css" />
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}bootstrap-responsive.min.css" />
@@ -9,13 +12,17 @@
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}matrix-style.css" />
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}matrix-media.css" />
         <link href="{$smarty.const.TPL_PATH}font-awesome/css/font-awesome.css" rel="stylesheet" />
-        <link rel="stylesheet" href="{$smarty.const.CSS_PATH}/jquery.gritter.css" />
-        <link href='http://fonts.useso.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{$smarty.const.CSS_PATH}jquery.gritter.css" />
+        <link href='http://fonts.useso.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
+        {foreach from=$addCss item=css}
+<link rel="stylesheet" href="{$smarty.const.CSS_PATH}{$css}" />
+        {/foreach}
+<script src="{$smarty.const.JS_PATH}jquery.min.js"></script> 
         </head>
         <body>
         <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">农年科技管理中心</a></h1>
+  <h1><a href="{spUrl c="main"}">{$site_name}管理中心</a></h1>
 </div>
 <!--close-Header-part--> 
         

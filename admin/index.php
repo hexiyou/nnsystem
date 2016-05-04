@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-16 11:55:08
+ * @Last Modified time: 2016-05-04 20:35:45
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -17,6 +17,7 @@
   *    农年CMS后台管理入口文件
   *    
   */
+define('IN_APP',true);//入口绑定，防止非法调用PHP文件
 define('ADMIN_PATH',dirname(__FILE__)); //后台管理完整路径
 define("APP_PATH",dirname(ADMIN_PATH));
 define("SP_PATH",APP_PATH.DIRECTORY_SEPARATOR.'framework');
@@ -33,9 +34,7 @@ file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 require_once(ADMIN_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 
 //载入新浪云平台环境配置文件
-if(file_exists(APP_PATH.DSP.'sae_env.php')){
-    include(APP_PATH.DSP.'sae_env.php');
-}
+file_exists(APP_PATH.DSP.'sae_env.php') && include(APP_PATH.DSP.'sae_env.php');
 
 /** 载入框架 **/
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");

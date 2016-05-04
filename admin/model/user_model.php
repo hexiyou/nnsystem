@@ -3,13 +3,13 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 13:21:18
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-07 15:10:08
+ * @Last Modified time: 2016-05-04 20:25:28
  */
 
 class user_model extends spModel
 {
 
-	private $pk = 'id';
+	public $pk = 'id';
 	public $table = 'admin';
 
 	var $addrules = array();
@@ -40,12 +40,46 @@ class user_model extends spModel
 
 
 	
-	function __construct(argument)
+	public function __construct()
 	{
-		# code...
+		parent::__construct();
+		$this->group_table = spClass('admin_group_model');
 	}
 
 	public function checkUser(){
 
+	}
+
+
+
+	public function getGroupName($groupid){
+		if($groupid==null) return false;
+		$result = $this->group_table->find(array('id'=>$groupid));
+		return $result!=false?$result['title']:'Unknown';
+	}
+
+
+
+	public function getUserByID($user_id){
+		return $this->find(array('id'=>$user_id));
+	}
+
+	/**
+	 * [getList 获取管理员用户列表，带分页输出]
+	 * @param  integer $page 当前页码
+	 * @param  integer $pageSize 页长/记录条数
+	 * @param  [type] $conditions [description]
+	 * @param  [type] $sort       [description]
+	 * @param  [type] $fields     [description]
+	 * @return [type]             [description]
+	 */
+	public function getList($page, $pageSize=10, $conditions = null, $sort = null, $fields = null){
+		$data = $this->spPager($page, $pageSize)->findAll($conditions, $sort, $fields);
+		foreach ($data as $key => $row) {
+			$data[$key]['groupname'] = $this->getGroupName($row['groupid']);
+			$data[$key]['create_time'] = date("Y-m-d H:i",$row['create_time']);
+			$data[$key]['last_login'] = date("Y-m-d H:i",$row['last_login']);
+		}
+		return $data;
 	}
 }
