@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-04 20:39:31
+ * @Last Modified time: 2016-05-05 13:52:08
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -19,6 +19,8 @@ abstract class base extends spController
     public $version = 'V1.0';
 
     public $__pre_open = false; //是否已输出<pre>标签，调试用
+
+    public $_cache_prefix='admin_user_';
 
     public $name = "nnCMS backend manage conntoller";
 
@@ -52,7 +54,7 @@ abstract class base extends spController
                 class_exists($__controller . '_model') && $this->db = spClass($__controller . '_model', null, $__model_path);
             }
         }
-        $this->checkLogin(); //检查是否登录
+        $this->checkLogin($__controller,$__action); //检查是否登录
         $this->checkPrivilege(); //检查是否有权限
         $this->autoSetVal(); //自动初始化参数
         $this->assignConst(); //赋值常用变量到模板
@@ -181,7 +183,7 @@ abstract class base extends spController
     }
 
 
-    //TODO: 判断是否是POST提交，不严谨
+    //TODO: 判断是否是POST提交，不严谨,不推荐
     /**
      *  检测是否有POST数据提交
      * @return bool
@@ -221,12 +223,30 @@ abstract class base extends spController
 
 
     /**
-     *  检查用户是否登录
-     * @return bool
+     * [checkLogin 检查用户是否登录，并作相应处理]
+     * @param  [type] $controller [description]
+     * @param  [type] $action     [description]
+     * @return [type]             [description]
      */
-    public function checkLogin()
+    public function checkLogin($controller,$action)
     {
-        return false;
+        //登录页面不重复跳转
+        if($controller=="user"&&$action=="login"){ 
+           if($this->_checkUserLogin()){
+                $this->jump(spUrl('main','index'));
+            }
+            return true;
+        }
+        if(in_array($controller,$this->no_author_contollers)){
+            return true;
+        }
+        if(!$this->_checkUserLogin()){
+            $direct = urlencode(spUrl($controller,$action));
+            $args = array('r'=>$direct);
+            $this->success('请先登录后再操作！',spUrl('user','login',$args));
+            // $this->jump(spUrl('user','login'));
+            return false;
+        }
     }
 
     /**
@@ -240,10 +260,40 @@ abstract class base extends spController
         return $_model->getUserByID($uid);
     }
 
-
+    /**
+     * [_checkUserLogin 内部函数，检查用户登录是否有效]
+     * @return boolean [description]
+     */
     public function _checkUserLogin(){
-
+        if($this->getuid()==null){
+            return false;
+        }
+        $uid = get_session('uid');
+        $_author_hash = get_session('author_hash');
+        $_user = spAccess('r',$this->_cache_prefix.$uid);
+        if(!$_user){
+            $_model = spClass('user_model');
+            $_user = $_model->getUserByID($uid); 
+            spAccess('w',$this->_cache_prefix.$uid,$_user);         
+        }
+        if(!$_user||$_author_hash != md5($_user['password'].$_user['pwd_hash'])){
+            return false;
+        }
+        return true;
     }
+
+
+    /**
+     * [_setUserStatus 设置用户登入]
+     * @param [type] $_user [description]
+     */
+    public function _setUserStatus($_user){
+        set_session('uid',$_user['id']);
+        set_session('author_hash',md5($_user['password'].$_user['pwd_hash']));
+        spAccess('w',$this->_cache_prefix.$uid,$_user);
+        return true;
+    }
+
 
     /**
      *  检查用户是否有该项的操作权限
@@ -260,6 +310,46 @@ abstract class base extends spController
      */
     public function getuid()
     {
-
+        return get_session('uid');
     }
+
+
+     /**
+     *
+     * 错误提示程序
+     *
+     * 应用程序的控制器类可以覆盖该函数以使用自定义的错误提示
+     *
+     * @param $msg   错误提示需要的相关信息
+     * @param $url   跳转地址
+     */
+    public function error($msg, $url = ''){
+       if($url == "exit"){
+           $url="";
+        }else{
+            $url = empty($url) ? "window.history.back();" : "location.href=\"{$url}\";";
+        }
+        echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><script>function sptips(){alert(\"{$msg}\");{$url}}</script></head><body onload=\"sptips()\"></body></html>";
+        exit;
+    }
+
+    /**
+     *
+     * 成功提示程序
+     *
+     * 应用程序的控制器类可以覆盖该函数以使用自定义的成功提示
+     *
+     * @param $msg   成功提示需要的相关信息
+     * @param $url   跳转地址
+     */
+    public function success($msg, $url = ''){
+        if($url == "exit"){
+           $url="";
+        }else{
+            $url = empty($url) ? "window.history.back();" : "location.href=\"{$url}\";";
+        }
+        echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><script>function sptips(){alert(\"{$msg}\");{$url}}</script></head><body onload=\"sptips()\"></body></html>";
+        exit;
+    }
+
 }

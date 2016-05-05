@@ -3,13 +3,13 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 12:48:37
+ * @Last Modified time: 2016-05-05 11:12:05
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
-
+defined('IN_APP') or exit('Access Denied!');
 class error_404 extends base
 {
     public $page_title = "页面不存在";

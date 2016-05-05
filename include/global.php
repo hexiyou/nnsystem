@@ -137,5 +137,42 @@ function set_cookie($name,$value,$expire=3600,$path=null,$domain=null,$secure=nu
 	return setcookie($name,$value,$expire,$path,$domain,$secure);
 }
 
+function get_session($name)
+{
+	$_prefix = $G_C['cookie_pre']?$G_C['cookie_pre']:'';
+	if(!isset($_SESSION)){return null;}
+	$name = $_prefix.$name;
+	return isset($_SESSION[$name])?$_SESSION[$name]:null;
+}
+
+/**
+ * [clear_session 清除所有session会话
+ * @param  string $range [description]
+ * @return [type]        [description]
+ */
+function clear_session($range="all"){
+	if($range=="all"){
+		return session_unset();
+	}else{
+		return session_destroy();
+	}
+}
+
+/**
+ * [set_session 设置sesssion值]
+ * @param [type] $name  [description]
+ * @param string $value [description]
+ */
+function set_session($name,$value="")
+{
+	$_prefix = $G_C['cookie_pre']?$G_C['cookie_pre']:'';
+	if(!isset($_SESSION)){session_start();}
+	$name = $_prefix.$name;
+	if(isset($_SESSION[$name])&&$value==""){
+		unset($_SESSION[$name]);
+	}
+	return $_SESSION[$name] = $value;
+}
+
 //注册自动加载函数语句，不可删除
 function_exists('spl_autoload_register') && spl_autoload_register('__autoload');

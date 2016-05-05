@@ -3,11 +3,11 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-05-04 20:16:08
+ * @Last Modified time: 2016-05-05 13:55:00
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
-
+defined('IN_APP') or exit('Access Denied!');
 class user extends base
 {
     public $auto_display = false; //关闭自动模板输出
@@ -100,14 +100,46 @@ class user extends base
         }
     }
 
-
+    /**
+     * [login 管理员登录]
+     * @return [type] [description]
+     */
     public function login()
     {
         if ($this->isPOST()) {
-            $this->dumpout($this->spArgs());
+            $user_name = $this->spArgs('username');
+            $password = $this->spArgs('password');
+            if(empty($user_name)||empty($password)){
+                $this->error('账号和密码不能为空!');
+            }
+            $touch = $this->db->userLogin($user_name,$password);
+            if($touch>=1){
+                $user = $this->db->getUserByID($touch);
+                $this->_setUserStatus($user);
+                $direct_url = urldecode($this->spArgs('r',spUrl('main','index')));
+                $this->jump($direct_url);
+            }elseif($touch==-1){
+                $this->error('账户不存在！');
+            }else{
+                $this->error('登录失败！');
+
+            }
         } else {
+            $this->direct_url = urlencode($this->spArgs('r'));
             $this->display('login.html');
         }
+    }
+
+
+    /**
+     * [logout 注销管理员登录]
+     * @return [type] [description]
+     */
+    public function logout(){
+        set_session('uid');
+        set_session('author_hash');
+        $this->success('退出成功!',spUrl('user','login'));
+        //$this->jump(spUrl('user','login'));
     }
 
 

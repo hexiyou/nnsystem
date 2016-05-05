@@ -3,9 +3,9 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 13:21:18
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-05-04 20:25:28
+ * @Last Modified time: 2016-05-05 12:57:51
  */
-
+defined('IN_APP') or exit('Access Denied!');
 class user_model extends spModel
 {
 
@@ -37,8 +37,6 @@ class user_model extends spModel
 			),
 		)
 	);
-
-
 	
 	public function __construct()
 	{
@@ -51,7 +49,6 @@ class user_model extends spModel
 	}
 
 
-
 	public function getGroupName($groupid){
 		if($groupid==null) return false;
 		$result = $this->group_table->find(array('id'=>$groupid));
@@ -59,7 +56,34 @@ class user_model extends spModel
 	}
 
 
+	/**
+	 * [userLogin 后台用户登录统一入口]
+	 * @param  string $user_name [用户名]
+	 * @param  string $password  [密码]
+	 * @return integer -1，账号不存在;-2.账户被禁用；0，登录失败;登录成功返回用户id;
+	 */
+	public function userLogin($user_name,$password){
+         $_info = $this->find(array('user_name'=>$user_name));
+         if(empty($_info)){
+         	return -1; //账户不存在
+         }
+         $_halt = $_info['pwd_hash'];
+         $_password = $_info['password'];
+         $_lock_status = $_info['lock'];
+         if($_lock_status==1) return -2; //账户被禁用
+         $password_encrypt = md5(md5($password).$_halt);
+         if($password_encrypt==$_password){
+         	return $_info[$this->pk];
+         }
+         return 0;
+	}
 
+
+	/**
+	 * [getUserByID 由用户ID获取用户信息]
+	 * @param  [type] $user_id [description]
+	 * @return [type]          [description]
+	 */
 	public function getUserByID($user_id){
 		return $this->find(array('id'=>$user_id));
 	}
@@ -68,10 +92,10 @@ class user_model extends spModel
 	 * [getList 获取管理员用户列表，带分页输出]
 	 * @param  integer $page 当前页码
 	 * @param  integer $pageSize 页长/记录条数
-	 * @param  [type] $conditions [description]
-	 * @param  [type] $sort       [description]
-	 * @param  [type] $fields     [description]
-	 * @return [type]             [description]
+	 * @param  [type] $conditions 查询条件
+	 * @param  [type] $sort       排序
+	 * @param  [type] $fields     待取出字段列表
+	 * @return array             查询结果
 	 */
 	public function getList($page, $pageSize=10, $conditions = null, $sort = null, $fields = null){
 		$data = $this->spPager($page, $pageSize)->findAll($conditions, $sort, $fields);
