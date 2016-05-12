@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-05 13:52:08
+ * @Last Modified time: 2016-05-12 10:35:36
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -324,13 +324,18 @@ abstract class base extends spController
      * @param $url   跳转地址
      */
     public function error($msg, $url = ''){
-       if($url == "exit"){
+      /* if($url == "exit"){
            $url="";
         }else{
             $url = empty($url) ? "window.history.back();" : "location.href=\"{$url}\";";
         }
         echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><script>function sptips(){alert(\"{$msg}\");{$url}}</script></head><body onload=\"sptips()\"></body></html>";
-        exit;
+        exit;*/
+        $this->page_title = $msg;
+        $this->msg = $msg;
+        $this->url = $url;
+        $this->display('error.html');
+        exit();
     }
 
     /**
@@ -343,13 +348,18 @@ abstract class base extends spController
      * @param $url   跳转地址
      */
     public function success($msg, $url = ''){
-        if($url == "exit"){
+      /*  if($url == "exit"){
            $url="";
         }else{
             $url = empty($url) ? "window.history.back();" : "location.href=\"{$url}\";";
         }
         echo "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><script>function sptips(){alert(\"{$msg}\");{$url}}</script></head><body onload=\"sptips()\"></body></html>";
-        exit;
+        exit;*/
+        $this->page_title = $msg;
+        $this->msg = $msg;
+        $this->url = $url;
+        $this->display('success.html');
+        exit();
     }
 
 }

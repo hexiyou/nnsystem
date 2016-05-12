@@ -1,5 +1,5 @@
 <!--底部脚本，动态判断-->
-
+{if !isset($nofooterscripts)}
 {if $__controller=="user" && $__action=="list"}
 <script src="{$smarty.const.JS_PATH}jquery.min.js"></script> 
 <script src="{$smarty.const.JS_PATH}jquery.ui.custom.js"></script> 
@@ -31,7 +31,7 @@
 <script src="{$smarty.const.JS_PATH}matrix.popover.js"></script> 
 <script src="{$smarty.const.JS_PATH}jquery.dataTables.min.js"></script> 
 <script src="{$smarty.const.JS_PATH}matrix.tables.js"></script>
-{/if}
+{/if}{/if}
 {foreach from=$appendJS item=js}
 <script src="{$smarty.const.JS_PATH}{$js}"></script> 
 {/foreach}

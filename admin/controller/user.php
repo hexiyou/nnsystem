@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-05-05 13:55:00
+ * @Last Modified time: 2016-05-12 15:00:21
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -76,7 +76,7 @@ class user extends base
             $this->success('提交成功');
         }else{
             $this->page_title = "用户编辑";
-            $user = $this->db->find(array('id'=>$uid));
+            $this->user = $this->db->find(array('id'=>$uid));
             $this->display('user_edit.html');
         }
     }
@@ -142,10 +142,16 @@ class user extends base
         //$this->jump(spUrl('user','login'));
     }
 
-
-    public function admin_add()
+    /**
+     * [add 添加管理员用户]
+     */
+    public function add()
     {
-        $this->display('index.html');
+        if($this->isPOST()){
+
+        }else{
+            $this->display('user_add.html');
+        }
     }
 
 

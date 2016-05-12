@@ -1,7 +1,7 @@
 <!--Footer-part-->
 
 <div class="row-fluid">
-  <div id="footer" class="span12"> 2013 &copy; Matrix Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a> </div>
+  <div id="footer" class="span12"> 2016 &copy; NNCMS Admin. Brought to you by <a href="http://themedesigner.in/">Themedesigner.in</a> </div>
 </div>
 
 <!--end-Footer-part-->
@@ -31,16 +31,6 @@ function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
 
-
-$(document).ready(function(){
-    if(typeof window.__setNavStatus!="undefined" && window.__setNavStatus.constructor==Function){
-       console.log('aaa');
-       window.__setNavStatus.call(null);
-    }else{
-       $('li[relctl="{$__controller}"]').eq(0).addClass('open');
-       $('li[relctl="{$__controller}"]').find('a[relact="{$__action}"]').addClass('nav_active');
-    }
-});
 </script>
 </body>
 </html>

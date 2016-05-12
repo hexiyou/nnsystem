@@ -106,12 +106,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-function __setNavStatus(){
-  $('li[relctl="user"]').eq(0).addClass('open');
-  $('li[relctl="user"]').find('a[relact="list"]').addClass('nav_active');
-}
-</script>
+
 <script src="{$JS_PATH}jquery.ui.custom.js"></script> 
 <script src="{$JS_PATH}bootstrap.min.js"></script> 
 <script src="{$JS_PATH}bootstrap-colorpicker.js"></script> 
@@ -120,12 +115,16 @@ function __setNavStatus(){
 <script src="{$JS_PATH}jquery.uniform.js"></script> 
 <script src="{$JS_PATH}select2.min.js"></script> 
 <script src="{$JS_PATH}matrix.js"></script> 
-<script src="{$JS_PATH}matrix.form_common.js"></script> 
+<!-- <script src="{$JS_PATH}matrix.form_common.js"></script>  -->
 <script src="{$JS_PATH}wysihtml5-0.3.0.js"></script> 
 <script src="{$JS_PATH}jquery.peity.min.js"></script> 
 <script src="{$JS_PATH}bootstrap-wysihtml5.js"></script> 
 <!-- <script src="{$JS_PATH}admin.form_validation.js"></script> -->
 <script type="text/javascript">
+function __setNavStatus(){
+  $('li[relctl="user"]').eq(0).addClass('open');
+  $('li[relctl="user"]').find('a[relact="list"]').addClass('nav_active');
+}
 
  $('.textarea_editor').wysihtml5();
 

@@ -11,16 +11,26 @@
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}fullcalendar.css" />
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}matrix-style.css" />
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}matrix-media.css" />
-        <link href="{$smarty.const.TPL_PATH}font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{$smarty.const.TPL_PATH}font-awesome/css/font-awesome.css"/>
         <link rel="stylesheet" href="{$smarty.const.CSS_PATH}jquery.gritter.css" />
+{foreach from=$addCss item=css}
+        <link rel="stylesheet" href="{$smarty.const.CSS_PATH}{$css}" />
+{/foreach}
         <link href='http://fonts.useso.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
-        {foreach from=$addCss item=css}
-<link rel="stylesheet" href="{$smarty.const.CSS_PATH}{$css}" />
-        {/foreach}
-<script src="{$smarty.const.JS_PATH}jquery.min.js"></script> 
-        </head>
-        <body>
-        <!--Header-part-->
+        <script type="text/javascript" src="{$smarty.const.JS_PATH}jquery.min.js"></script> 
+        <script type="text/javascript">
+        $(document).ready(function(){
+            if(typeof window.__setNavStatus!="undefined" && window.__setNavStatus.constructor==Function){
+               window.__setNavStatus.call(null);
+            }else{
+               $('li[relctl="{$__controller}"]').eq(0).addClass('open');
+               $('li[relctl="{$__controller}"]').find('a[relact="{$__action}"]').addClass('nav_active');
+            }
+        });
+        </script>
+    </head>
+<body>
+<!--Header-part-->
 <div id="header">
   <h1><a href="{spUrl c="main"}">{$site_name}管理中心</a></h1>
 </div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+    <head>
+        <meta charset="utf-8"/>
+        <title>{$msg}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit"/>
+{if $url}
+        <meta http-equiv="refresh" content="3;URL={$url}"/>
+{/if}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="template/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="template/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="template/css/fullcalendar.css" />
+        <link rel="stylesheet" href="template/css/matrix-style.css" />
+        <link rel="stylesheet" href="template/css/matrix-media.css" />
+        <link href="template/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" href="template/css/jquery.gritter.css" />
+        <link href='http://fonts.useso.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
+        <script src="template/js/jquery.min.js"></script> 
+        </head>
+        <body>
+<!--Header-part-->
+<!--
+<div id="header">
+  <h1><a href="/admin/index.php?c=main&a=index">管理中心</a></h1>
+</div>
+-->
+
+<div id="content" style="margin-left: 0px;padding-top:0px;min-height:90%;height:auto;">
+  <!--<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Sample pages</a> <a href="#" class="current">Error</a> </div>
+    <h1>Error 403</h1>
+  </div>-->
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-remove"></i> </span>
+            <h5>提示信息</h5>
+          </div>
+          <div class="widget-content">
+            <div class="error_ex">
+              <h3>{$msg}</h3>
+              <a class="btn btn-link btn-big"  href="javascript:window.history.back();">返回</a> 
+              <a class="btn btn-warning btn-big"  href="{$url}">确定</a> 
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{assign var="nofooterscripts" value="true"}
+{$appendJS[]="template/js/jquery.min.js"}
+{$appendJS[]="template/jquery.ui.custom.js"}
+{$appendJS[]="template/js/bootstrap.min.js"}
+{$appendJS[]="template/js/maruti.html"}
+
+{include file="footer.html"}
