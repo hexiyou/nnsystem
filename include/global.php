@@ -174,5 +174,188 @@ function set_session($name,$value="")
 	return $_SESSION[$name] = $value;
 }
 
+/**
+ * [L 调用语言项,有缓存时优先读取缓存]
+ * [可同时支持多语言，不局限于config配置]
+ * @param [type] $name [description]
+ */
+function L($name,$language=null){
+    global $__controller,$__action,$config;
+    $key = $__controller;
+    $language==null&&$language=$config['language'];
+    if(defined('IN_ADMIN')){
+    	$key = 'admin_'.$key;
+    }
+    $key.='_'.$language;
+    $_cache = spAccess('r',$key);
+    if(!$_cache){
+    	return source_Lang($name,$language);
+    }
+    if(array_key_exists($name,$_cache)){
+    	return $_cache[$name];
+    }
+    return "";
+}
+
+/**
+ * [source_Lang 从语言文件包读取语言选项]
+ * @param  [type] $name [description]
+ * @return [type]       [description]
+ */
+function source_Lang($name,$language=null){
+   global $__controller,$__action,$config;
+   $_lang = spClass('lib_lang',null,INC_PATH.'lib_lang.php');
+   $_lang->setLangDir(LANG_PATH);
+   $language==null&&$language=$config['language'];
+   $_lang->setLang($language);
+   $_lang->importLangFile('system');
+   $_lang->importLangFile('common');
+   $key = $__controller;
+   if(defined('IN_ADMIN')){
+   		$key = 'admin_'.$key;
+   		$_lang->importLangFile('admin');
+   		$_lang->importLangFile($key);
+   }
+   $key.='_'.$language;
+   spAccess('w',$key,$_lang->_langData);
+   return $_lang->_langData[$name];
+}
+
+/**
+ * 获取请求ip
+ *
+ * @return ip地址
+ */
+function ip() {
+	if(getenv('HTTP_CLIENT_IP') && strcasecmp(getenv('HTTP_CLIENT_IP'), 'unknown')) {
+		$ip = getenv('HTTP_CLIENT_IP');
+	} elseif(getenv('HTTP_X_FORWARDED_FOR') && strcasecmp(getenv('HTTP_X_FORWARDED_FOR'), 'unknown')) {
+		$ip = getenv('HTTP_X_FORWARDED_FOR');
+	} elseif(getenv('REMOTE_ADDR') && strcasecmp(getenv('REMOTE_ADDR'), 'unknown')) {
+		$ip = getenv('REMOTE_ADDR');
+	} elseif(isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], 'unknown')) {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return preg_match ( '/[\d\.]{7,15}/', $ip, $matches ) ? $matches [0] : '';
+}
+
+function get_cost_time() {
+	$microtime = microtime ( TRUE );
+	return $microtime - SYS_START_TIME;
+}
+
+
+/**
+ * 查询字符是否存在于某字符串
+ *
+ * @param $haystack 字符串
+ * @param $needle 要查找的字符
+ * @return bool
+ */
+function str_exists($haystack, $needle)
+{
+	return !(strpos($haystack, $needle) === FALSE);
+}
+
+/**
+ * 取得文件扩展
+ *
+ * @param $filename 文件名
+ * @return 扩展名
+ */
+function fileext($filename) {
+	return strtolower(trim(substr(strrchr($filename, '.'), 1, 10)));
+}
+
+
+/**
+ * iconv 编辑转换
+ */
+if (!function_exists('iconv')) {
+	function iconv($in_charset, $out_charset, $str) {
+		$in_charset = strtoupper($in_charset);
+		$out_charset = strtoupper($out_charset);
+		if (function_exists('mb_convert_encoding')) {
+			return mb_convert_encoding($str, $out_charset, $in_charset);
+		} else {
+			pc_base::load_sys_func('iconv');
+			$in_charset = strtoupper($in_charset);
+			$out_charset = strtoupper($out_charset);
+			if ($in_charset == 'UTF-8' && ($out_charset == 'GBK' || $out_charset == 'GB2312')) {
+				return utf8_to_gbk($str);
+			}
+			if (($in_charset == 'GBK' || $in_charset == 'GB2312') && $out_charset == 'UTF-8') {
+				return gbk_to_utf8($str);
+			}
+			return $str;
+		}
+	}
+}
+
+/**
+ * IE浏览器判断
+ */
+
+function is_ie() {
+	$useragent = strtolower($_SERVER['HTTP_USER_AGENT']);
+	if((strpos($useragent, 'opera') !== false) || (strpos($useragent, 'konqueror') !== false)) return false;
+	if(strpos($useragent, 'msie ') !== false) return true;
+	return false;
+}
+
+
+/**
+ * 文件下载
+ * @param $filepath 文件路径
+ * @param $filename 文件名称
+ */
+
+function file_down($filepath, $filename = '') {
+	if(!$filename) $filename = basename($filepath);
+	if(is_ie()) $filename = rawurlencode($filename);
+	$filetype = fileext($filename);
+	$filesize = sprintf("%u", filesize($filepath));
+	if(ob_get_length() !== false) @ob_end_clean();
+	header('Pragma: public');
+	header('Last-Modified: '.gmdate('D, d M Y H:i:s') . ' GMT');
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: pre-check=0, post-check=0, max-age=0');
+	header('Content-Transfer-Encoding: binary');
+	header('Content-Encoding: none');
+	header('Content-type: '.$filetype);
+	header('Content-Disposition: attachment; filename="'.$filename.'"');
+	header('Content-length: '.$filesize);
+	readfile($filepath);
+	exit;
+}
+
+/**
+ * 判断字符串是否为utf8编码，英文和半角字符返回ture
+ * @param $string
+ * @return bool
+ */
+function is_utf8($string) {
+	return preg_match('%^(?:
+					[\x09\x0A\x0D\x20-\x7E] # ASCII
+					| [\xC2-\xDF][\x80-\xBF] # non-overlong 2-byte
+					| \xE0[\xA0-\xBF][\x80-\xBF] # excluding overlongs
+					| [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2} # straight 3-byte
+					| \xED[\x80-\x9F][\x80-\xBF] # excluding surrogates
+					| \xF0[\x90-\xBF][\x80-\xBF]{2} # planes 1-3
+					| [\xF1-\xF3][\x80-\xBF]{3} # planes 4-15
+					| \xF4[\x80-\x8F][\x80-\xBF]{2} # plane 16
+					)*$%xs', $string);
+}
+
+/**
+ * 生成随机字符串
+ * @param string $lenth 长度
+ * @return string 字符串
+ */
+function create_randomstr($lenth = 6) {
+	return random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
+}
+
+
 //注册自动加载函数语句，不可删除
 function_exists('spl_autoload_register') && spl_autoload_register('__autoload');

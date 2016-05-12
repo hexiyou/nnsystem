@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-05 11:15:19
+ * @Last Modified time: 2016-05-12 16:31:48
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -18,6 +18,7 @@
   *    
   */
 define('IN_APP',true);//入口绑定，防止非法调用PHP文件
+define('IN_ADMIN',true);
 define('ADMIN_PATH',dirname(__FILE__)); //后台管理完整路径
 define("APP_PATH",dirname(ADMIN_PATH));
 define("SP_PATH",APP_PATH.DIRECTORY_SEPARATOR.'framework');
@@ -39,6 +40,7 @@ file_exists(APP_PATH.DSP.'sae_env.php') && include(APP_PATH.DSP.'sae_env.php');
 /** 载入框架 **/
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");
 
+//载入基础控制器
 import($spConfig['controller_path'].DIRECTORY_SEPARATOR.'base.php',FALSE,TRUE);
 
 //启动应用
