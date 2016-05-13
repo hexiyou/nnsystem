@@ -3,18 +3,18 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> 主页</a> <a href="#" class="current">用户管理</a> </div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> {L('main_page')}</a> <a href="#" class="current">{L('user_manage')}</a> </div>
     <!--<h1>{$page_title}</h1>-->
   </div>
+
   <div class="container-fluid">
     <hr>
     
-        
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>用户管理</h5>
-           <span style="float: right;"> <a class="btn btn-primary" href="{spUrl c="user" a="add"}">添加</a></span></div>
-          <div class="widget-content ">
+            <h5>{L('user_manage')}</h5>
+           <span style="float: right;"> <a class="btn btn-primary" href="{spUrl c="user" a="add"}">{L('add')}</a></span></div>
+          <div class="widget-content">
           <div class="widget-content nopadding">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid"><div class=""><div id="DataTables_Table_0_length" class="dataTables_length"><label>显示<select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" style="display: none;"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 记录</label></div></div>
             <table class="table table-bordered table-striped with-check">
@@ -47,7 +47,7 @@
                   <td>{$user.last_login}</td>
                   <td><input class="span1" type="text" name="listorder" value="{$user.list_order}"/></td>
                   {assign var="user_id" value=$user.id}
-                  <td><a href="{spUrl c="user" a="edit" id="$user_id"}">编辑</a>&nbsp;&nbsp;<a href="{spUrl c="user" a="delete" id="user_id"}">删除</a></td>
+                  <td><a href="{spUrl c="user" a="edit" id="$user_id"}">编辑</a>&nbsp;&nbsp;<a href="{spUrl c="user" a="delete" id="user_id"}">{L('remove')}</a></td>
                 </tr>
              {/foreach}
               </tbody>

@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-12 16:31:48
+ * @Last Modified time: 2016-05-13 16:26:33
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -34,7 +34,7 @@ file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 //载入后台管理初始化文件
 require_once(ADMIN_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
 
-//载入新浪云平台环境配置文件
+//载入新浪云平台环境检测文件
 file_exists(APP_PATH.DSP.'sae_env.php') && include(APP_PATH.DSP.'sae_env.php');
 
 /** 载入框架 **/

@@ -51,6 +51,13 @@
     </div>
   </div>
 </div>
+{if $script}
+<script type="text/javascript">
+  setTimeout(function(){
+    {$script}
+  },3000);
+</script>
+{/if}
 {assign var="nofooterscripts" value="true"}
 {$appendJS[]="template/js/jquery.min.js"}
 {$appendJS[]="template/jquery.ui.custom.js"}

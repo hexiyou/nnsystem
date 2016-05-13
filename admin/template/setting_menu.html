@@ -1,0 +1,82 @@
+{$addCss[]="colorpicker.css"}
+{$addCss[]="datepicker.css"}
+{$addCss[]="uniform.css"}
+{$addCss[]="select2.css"}
+{$page_title=L('clear_cache')}
+{include file="header.html"}
+{include file="sidebar.html"}
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="返回主页"><i class="icon-home"></i> 主页</a> <a href="#" class="current">{L('clear_cache')}</a> </div>
+    <!--<h1>{$page_title}</h1>-->
+  </div>
+  <div class="container-fluid">
+    <hr>
+    
+        
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+            <h5>{L('clear_cache')}</h5>
+            <!--<span class="label label-info">Featured</span>--></div>
+          <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+              
+            <div class="control-group">
+              <label class="control-label">{L('select_items')}</label>
+              <div class="controls">
+                <label>
+                  <div class="checker" id="uniform-undefined"><span class="checked"><input type="checkbox" name="cache_type[]" style="opacity: 0;" value="template" checked="checked"></span></div>
+                  {L('template_cache')}</label>
+                <label>
+                  <div class="checker" id="uniform-undefined"><span class=""><input type="checkbox" name="cache_type[]" style="opacity: 0;" value="data" checked="checked"></span></div>
+                  {L('data_cache')}</label>
+                <label>
+                  <div class="checker" id="uniform-undefined"><span class="checked"><input type="checkbox" name="cache_type[]" style="opacity: 0;" value="lang" checked="checked"></span></div>
+                   {L('lang_cache')}</label>
+              </div>
+            </div>
+              <div class="form-actions">
+                <a class="btn btn-primary"  href="javascript:window.history.back();">{L('back')}</a>
+                <input name="submit" type="submit" value="{L('ok')}" class="btn btn-success">
+              </div>
+            </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function __setNavStatus(){
+  $('li[relctl="setting"]').eq(0).addClass('open');
+  $('li[relctl="setting"]').find('a[relact="clear"]').addClass('nav_active');
+}
+</script>
+<script src="{$JS_PATH}jquery.ui.custom.js"></script> 
+<script src="{$JS_PATH}bootstrap.min.js"></script> 
+<script src="{$JS_PATH}bootstrap-colorpicker.js"></script> 
+<script src="{$JS_PATH}bootstrap-datepicker.js"></script> 
+<script src="{$JS_PATH}masked.js"></script> 
+<script src="{$JS_PATH}jquery.uniform.js"></script> 
+<script src="{$JS_PATH}select2.min.js"></script> 
+<script src="{$JS_PATH}matrix.js"></script> 
+<script src="{$JS_PATH}matrix.form_common.js"></script> 
+<script src="{$JS_PATH}wysihtml5-0.3.0.js"></script> 
+<script src="{$JS_PATH}jquery.peity.min.js"></script> 
+<script src="{$JS_PATH}bootstrap-wysihtml5.js"></script> 
+<!-- <script src="{$JS_PATH}admin.form_validation.js"></script> -->
+<script type="text/javascript">
+
+ $('.textarea_editor').wysihtml5();
+
+ $('.switch_pwd').click(function(){
+  if($(this).index()==0){
+    $('#passwd_div').show();
+  }else{
+   $('#passwd_div').hide();
+  }
+ });
+</script>
+
+<!--end-Footer-part-->
+{assign var="nofooterscripts" value="true"}
+{include file="footer.html"}

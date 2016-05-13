@@ -7,30 +7,30 @@
         <li class="divider"></li>
         <li><a href="{spUrl c="user"}"><i class="icon-check"></i> 用户管理</a></li>
         <li class="divider"></li>
-        <li><a href="login.html"><i class="icon-key"></i>修改密码</a></li>
+        <li><a href="login.html"><i class="icon-key"></i>{L('change_passwd')}</a></li>
         <li class="divider"></li>
-        <li><a href="{spUrl c="user" a="logout"}"><i class="icon-key"></i>退出</a></li>
+        <li><a href="{spUrl c="user" a="logout"}"><i class="icon-key"></i>{L('exit')}</a></li>
       </ul>
     </li>
-    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">消息</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+    <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">{L('messages')}</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> 新消息</a></li>
+        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> {L('new_message')}</a></li>
         <li class="divider"></li>
-        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> 收件箱</a></li>
+        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> {L('inbox')}</a></li>
         <li class="divider"></li>
-        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> 发件箱</a></li>
+        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> {L('sendbox')}</a></li>
         <li class="divider"></li>
-        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> 回收站</a></li>
+        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> {L('trash')}</a></li>
       </ul>
     </li>
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">商品管理</span></a></li>
     <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">订单管理</span></a></li>
     <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">导航栏设置</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">会员管理</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">网站设置</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">系统设置</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">清除缓存</span></a></li>
-    <li class=""><a title="" href="{spUrl c="user" a="logout"}"><i class="icon icon-share-alt"></i> <span class="text">退出</span></a></li>
+    <li class=""><a title="" href="{spUrl c="setting" a="menu"}"><i class="icon icon-share-alt"></i> <span class="text">{L('member_manage')}</span></a></li>
+    <li class=""><a title="" href="{spUrl c="setting" a="index"}"><i class="icon icon-share-alt"></i> <span class="text">{L('system_setting')}</span></a></li>
+    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">{L('menu_map')}</span></a></li>
+    <li class=""><a title="" href="{spUrl c="setting" a="clear_all"}"><i class="icon icon-share-alt"></i> <span class="text">{L('clear_cache')}</span></a></li>
+    <li class=""><a title="" href="{spUrl c="user" a="logout"}"><i class="icon icon-share-alt"></i> <span class="text">{L('exit')}</span></a></li>
   </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -51,10 +51,11 @@
       </ul>
     </li>
 
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>文章管理</span> <span class="label label-important">3</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>内容管理</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="form-common.html">文章分类</a></li>
         <li><a href="form-validation.html">文章列表</a></li>
+        <li><a href="form-wizard.html">单页管理</a></li>
       </ul>
     </li>
 
@@ -73,10 +74,7 @@
      <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>订单管理</span> <span class="label label-important">2</span></a>
       <ul>
         <li><a href="tables.html">订单列表</a></li>
-        <li><a href="tables.html">商品列表</a></li>
-        <li><a href="form-validation.html">添加商品</a></li>
-        <li><a href="form-wizard.html">商品分类</a></li>
-        <li><a href="form-wizard.html">订单管理</a></li>
+        <li><a href="form-wizard.html">未支付订单</a></li>
         <li><a href="form-wizard.html">物流配送</a></li>
         <li><a href="form-wizard.html">支付方式</a></li>
         <li><a href="form-wizard.html">库存管理</a></li>
@@ -88,7 +86,7 @@
 
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>模型管理</span> <span class="label label-important">3</span></a>
       <ul>
-        <li><a href="tables.html">模型列表</a></li>
+        <li><a href="tables.html">模型管理</a></li>
         <li><a href="tables.html">新建模型</a></li>
       </ul>
     </li>
@@ -99,13 +97,15 @@
         <li><a href="form-common.html">广告位管理</a></li>
       </ul>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>系统设置</span> <span class="label label-important">3</span></a>
+    <li class="submenu" relctl="setting"> <a href="#"><i class="icon icon-th-list"></i> <span>系统设置</span> <span class="label label-important">4</span></a>
       <ul>
-        <li><a href="form-validation.html">网站设置</a></li>
-        <li><a href="form-common.html">SEO设置</a></li>
-        <li><a href="form-wizard.html">导航菜单管理</a></li>
+        <li><a relact="index" href="{spUrl c="setting" a="index"}">{L('website_setting')}</a></li>
+        <li><a relact="secure" href="{spUrl c="setting" a="secure"}">{L('secure_setting')}</a></li>
+        <li><a relact="config" href="{spUrl c="setting" a="config"}">{L('config_setting')}</a></li>
+        <li><a relact="seo" href="{spUrl c="setting" a="seo"}">{L('seo_setting')}</a></li>
+        <li><a relact="menu" href="{spUrl c="setting" a="menu"}">{L('menu_nav_set')}</a></li>
+        <li><a relact="clear" href="{spUrl c="setting" a="clear"}">{L('clear_cache')}</a></li>
         <li><a href="form-wizard.html">友情链接</a></li>
-        <li><a href="form-wizard.html">单页管理</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
@@ -115,10 +115,10 @@
         <li><a href="form-wizard.html">用户管理</a></li>
       </ul>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>用户管理</span> <span class="label label-important">3</span></a>
+    <li class="submenu" relctl="member"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('member_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
-        <li><a href="form-common.html">用户列表</a></li>
-        <li><a href="form-validation.html">登录日志</a></li>
+        <li><a relact="index" href="{spUrl c="member" a="list"}">{L('member_list')}</a></li>
+        <li><a href="{spUrl c="member" a="log"}">{L('member_login_log')}</a></li>
         <li><a href="form-wizard.html">用户管理</a></li>
       </ul>
     </li>
@@ -126,6 +126,7 @@
       <ul>
         <li><a href="form-common.html">数据库备份</a></li>
         <li><a href="form-common.html">数据库恢复</a></li>
+        <li><a href="form-common.html">数据库校验</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>模板管理</span> <span class="label label-important">3</span></a>
@@ -137,7 +138,7 @@
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>友情链接</span> <span class="label label-important">4</span></a>
       <ul>
-        <li><a href="error403.html">Error 403</a></li>
+        <li><a href="error403.html">友情链接列表</a></li>
       </ul>
     </li>
     <li class="content"> <span>月宽带传输</span>

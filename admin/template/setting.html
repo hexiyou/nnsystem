@@ -2,7 +2,7 @@
 {$addCss[]="datepicker.css"}
 {$addCss[]="uniform.css"}
 {$addCss[]="select2.css"}
-{assign var="page_title" value="管理员用户编辑"}
+{assign var="page_title" value="系统设置"}
 {include file="header.html"}
 {include file="sidebar.html"}
 
@@ -42,8 +42,8 @@
               <div class="control-group">
                <label class="control-label">生日</label>
                 <div class="controls">
-                  <div data-date="2012-12-02" class="input-append date datepicker"  data-date-format="yyyy-mm-dd">
-                    <input type="text" value="{date('Y-m-d',$user.birthday)}" data-date-format="yyyy-mm-dd" class=""/>
+                  <div data-date="2012-12-02" class="input-append date datepicker"  date-format="yyyy-mm-dd">
+                    <input type="text" value="{date('Y-m-d',$user.birthday)}" date-format="yyyy-mm-dd" class=""/>
                     <span class="add-on"><i class="icon-th"></i></span> </div>
                 </div>
               </div>
@@ -108,8 +108,8 @@
 </div>
 <script type="text/javascript">
 function __setNavStatus(){
-  $('li[relctl="user"]').eq(0).addClass('open');
-  $('li[relctl="user"]').find('a[relact="list"]').addClass('nav_active');
+  $('li[relctl="setting"]').eq(0).addClass('open');
+  $('li[relctl="setting"]').find('a[relact="index"]').addClass('nav_active');
 }
 </script>
 <script src="{$JS_PATH}jquery.ui.custom.js"></script> 

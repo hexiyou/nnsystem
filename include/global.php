@@ -80,7 +80,7 @@ function _email() {
 }
 
 function loadOauth($platform = "qq") {
-	$connectFile = APP_PATH . '/include/oauth/' . $platform . '_connect.php';
+	$connectFile = INC_PATH . '/oauth/' . $platform . '_connect.php';
 	if (file_exists($connectFile)) {
 		require_once $connectFile;
 	}
@@ -194,7 +194,7 @@ function L($name,$language=null){
     if(array_key_exists($name,$_cache)){
     	return $_cache[$name];
     }
-    return "";
+    return $name;
 }
 
 /**
@@ -218,7 +218,10 @@ function source_Lang($name,$language=null){
    }
    $key.='_'.$language;
    spAccess('w',$key,$_lang->_langData);
-   return $_lang->_langData[$name];
+   if(array_key_exists($name,$_lang->_langData)){
+   		return $_lang->_langData[$name];
+   }
+   return $name;
 }
 
 /**
@@ -345,6 +348,125 @@ function is_utf8($string) {
 					| [\xF1-\xF3][\x80-\xBF]{3} # planes 4-15
 					| \xF4[\x80-\x8F][\x80-\xBF]{2} # plane 16
 					)*$%xs', $string);
+}
+
+
+/**
+ * 递归显示当前指定目录下所有文件
+ * 使用dir函数
+ * @param string $dir 目录地址
+ * @return array $files 文件列表
+ */
+function get_files($dir) {
+    $files = array();
+ 
+    if (!is_dir($dir)) {
+        return $files;
+    }
+ 
+    $d = dir($dir);
+    while (false !== ($file = $d->read())) {
+        if ($file != '.' && $file != '..') {
+            $filename = $dir . "/"  . $file;
+ 
+            if(is_file($filename)) {
+                $files[] = $filename;
+            }else {
+                $files = array_merge($files, get_files($filename));
+            }
+        }
+    }
+    $d->close();
+    return $files;
+}
+
+/**
+ * 使用RecursiveDirectoryIterator遍历文件，列出所有文件路径
+ * @param RecursiveDirectoryIterator $dir 指定了目录的RecursiveDirectoryIterator实例
+ * @return array $files 文件列表
+ */
+function get_files2($dir) {
+    $files = array();
+ 
+    for (; $dir->valid(); $dir->next()) {
+        if ($dir->isDir() && !$dir->isDot()) {
+            if ($dir->haschildren()) {
+                $files = array_merge($files, get_files($dir->getChildren()));
+            };
+        }else if($dir->isFile()){
+            $files[] = $dir->getPathName();
+        }
+    }
+    return $files;
+}
+
+/**
+ * [unlink_tree 递归删除目录树，包含文件，子文件夹和子文件]
+ * @param  [type] $dir [description]
+ * @return [type]      [description]
+ */
+function unlink_tree($dir,$include_self=false){
+    if (!is_dir($dir)) {
+        return false;
+    }
+ 
+    $d = dir($dir);
+    while (false !== ($file = $d->read())) {
+        if ($file != '.' && $file != '..') {
+            $filename = $dir . "/"  . $file;
+            if(is_file($filename)) {
+                unlink($filename);
+            }else {
+                unlink_tree($filename);
+            }
+        }
+    }
+    $d->close();
+    if($include_self){
+    	rmdir($dir);
+    }
+    return true;
+}
+
+/**
+ * [get_LANGKey 根据控制器文件名称获取所有语言包键值项]
+ * @param  string $language 语言品种:zh-cn,en-us等等
+ * @param  string $range    获取范围:front-前台，admin-后台，all-整站
+ * @return array  $key_arr  语言键值集合数组
+ */
+function get_LANGKey($language,$range='all'){
+	$key_arr = array();
+
+	switch ($range) {
+		case 'front':
+			$front_ctl = glob(CTL_PATH.'*');
+			foreach ($front_ctl as $_ctl) {
+				$_ctl = basename($_ctl,'.php');
+				$key_arr[] = $_ctl.'_'.$language;
+			}
+			break;
+		case 'admin':
+			$admin_ctl = glob(ADMIN_CTL_PATH.'*');
+			foreach ($admin_ctl as $_ctl) {
+				$_ctl = basename($_ctl,'.php');
+				$key_arr[] = 'admin_'.$_ctl.'_'.$language;
+			}
+			break;
+		default:
+			$front_ctl = glob(CTL_PATH.'*');
+			$admin_ctl = glob(ADMIN_CTL_PATH.'*');
+			foreach ($front_ctl as $_ctl) {
+				$_ctl = basename($_ctl,'.php');
+				$key_arr[] = $_ctl.'_'.$language;
+			}
+			foreach ($admin_ctl as $_ctl) {
+				$_ctl = basename($_ctl,'.php');
+				$key_arr[] = 'admin_'.$_ctl.'_'.$language;
+			}
+			break;
+	}
+
+	return $key_arr;
 }
 
 /**
