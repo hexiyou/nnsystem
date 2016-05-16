@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-15 11:24:14
- * @Last Modified time: 2016-05-13 16:09:01
+ * @Last Modified time: 2016-05-16 20:10:00
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -15,6 +15,8 @@ defined('DATA_PATH') or define('DATA_PATH',dirname(__FILE__)); //站点Data目�
 defined('INC_PATH') or define('INC_PATH',APP_PATH.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR); //站点include类库目录
 defined('LANG_PATH') or define('LANG_PATH',INC_PATH.'lang'.DIRECTORY_SEPARATOR); //站点语言库目录
 defined('CTL_PATH') or define('CTL_PATH',APP_PATH.DSP.'controller'.DSP);
-defined('ADMIN_CTL_PATH') or define('ADMIN_CTL_PATH',ADMIN_PATH.DSP.'controller'.DSP);
+if(defined('ADMIN_PATH')){
+	defined('ADMIN_CTL_PATH') or define('ADMIN_CTL_PATH',ADMIN_PATH.DSP.'controller'.DSP);
+}
 define('AUTO_LOAD_MODEL',true); // 是否自动载入数据库模型
 define('LIST_ALIAS_ACTION','list_action');   //为各个控制器 list 动作创建别名指向
