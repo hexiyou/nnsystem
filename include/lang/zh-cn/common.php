@@ -3,13 +3,14 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:43
- * @Last Modified time: 2016-05-13 18:32:44
+ * @Last Modified time: 2016-05-16 11:23:21
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 $LANG['system'] = "农年科技管理";
 $LANG['ok'] = '确定';
 $LANG['back'] = '返回';
+$LANG['edit'] = '修改';
 $LANG['add'] = '添加';
 $LANG['exit'] = '退出';
 $LANG['enable'] = '启用';
@@ -27,6 +28,7 @@ $LANG['config_setting'] = '参数设置';
 $LANG['seo_setting'] = 'SEO设置';
 $LANG['keywords'] = '关键词';
 $LANG['description'] = '描述';
+$LANG['show'] = '显示';
 $LANG['make_html_switch'] = '生成真静态(仅文章模型)';
 $LANG['front_url_rewrite_switch'] = '前台伪静态';
 $LANG['backend_url_rewrite_switch'] = '后台伪静态';
@@ -46,4 +48,5 @@ $LANG['member_remove'] = '会员删除';
 $LANG['member_username'] = '会员名称';
 $LANG['member_login_log'] = '登录日志';
 $LANG['menu_nav_set'] = '导航菜单管理';
+$LANG['welcome'] = '欢迎';
 $LANG['language_clear_complete'] = '语言缓存清除完成';

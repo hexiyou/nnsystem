@@ -3,13 +3,14 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-13 15:15:18
+ * @Last Modified time: 2016-05-16 11:04:11
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 defined('IN_APP') or exit('Access Denied!');
+defined('IN_ADMIN') or exit('Access Denied!');
 /**
  * Class base
  * @desscription 后台管理基础控制类,抽象类，被继承
@@ -108,6 +109,7 @@ abstract class base extends spController
         $this->assign('title',$title);
         $this->assign('__controller',$GLOBALS['__controller']);
         $this->assign('__action',$GLOBALS['__action']);
+        $this->assign('_username',$this->getusername());
         ## coding
     }
 
@@ -254,7 +256,7 @@ abstract class base extends spController
      * @return [type] [description]
      */
     public function _getUserInfo(){
-        $uid = get_cookie('uid');
+        $uid = $this->getuid();
         if(!$uid) return false;
         $_model = spClass('user_model');
         return $_model->getUserByID($uid);
@@ -311,6 +313,15 @@ abstract class base extends spController
     public function getuid()
     {
         return get_session('uid');
+    }
+
+    /**
+     * [getusername 获取当前登录的用户名]
+     * @return [type] [description]
+     */
+    public function getusername(){
+        $info  = $this->_getUserInfo();
+        return $info['user_name'];
     }
 
 

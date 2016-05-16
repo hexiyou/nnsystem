@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-04-19 15:39:44
+ * @Last Modified time: 2016-05-16 11:05:03
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -36,6 +36,11 @@ class member extends base
     /**修改用户**/
     public function edit(){
 
+    }
+
+
+    public function log(){
+        
     }
 
 
