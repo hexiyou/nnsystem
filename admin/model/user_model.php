@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 13:21:18
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-05-05 12:57:51
+ * @Last Modified time: 2016-05-16 19:00:12
  */
 defined('IN_APP') or exit('Access Denied!');
 class user_model extends spModel
@@ -44,8 +44,37 @@ class user_model extends spModel
 		$this->group_table = spClass('admin_group_model');
 	}
 
-	public function checkUser(){
+	/**
+	 * [checkUser 检查用户名唯一性]
+	 * @param  [type] $username [description]
+	 * @return [type]           [description]
+	 */
+	public function checkUser($username){
+		return $this->find(array('user_name'=>$username));
+	}
 
+	/**
+	 * [add 添加管理员用户]
+	 * @param [type] $data [description]
+	 */
+	public function add($data){
+		$create_ip = ip();
+		$create_time = time();
+		$locked = $data['locked']?$data['locked']:0;
+		$password = md5(md5($data['password']).$data['pwd_hash']);
+		$crete_array = array(
+			'user_name' => $data['username'],
+			'password'=>$password,
+			'pwd_hash' => $data['pwd_hash'],
+			'email' => $data['email'],
+			'mobile' => $data['mobile'],
+			'birthday' => $data['birthday'],
+			'create_time' => $create_time,
+			'create_ip' => $create_ip,
+			'list_order' => 100,
+			'locked' =>$locked
+			);
+		return $this->create($crete_array);
 	}
 
 

@@ -3,11 +3,12 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-05-13 15:09:33
+ * @Last Modified time: 2016-05-16 19:19:50
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 defined('IN_APP') or exit('Access Denied!');
+defined('IN_ADMIN') or exit('Access Denied!');
 class user extends base
 {
     public $auto_display = false; //关闭自动模板输出
@@ -73,9 +74,9 @@ class user extends base
         }
 
         if($this->isPost()){
-            $this->success('提交成功');
+            $this->success(L('submit_success'));
         }else{
-            $this->page_title = "用户编辑";
+            $this->page_title = L('user_edit');
             $this->user = $this->db->find(array('id'=>$uid));
             $this->display('user_edit.html');
         }
@@ -88,16 +89,25 @@ class user extends base
     public function delete(){
         $uid = $this->spArgs('id');
         if($uid==null){
-            $this->error('没有用户ID');
+            $this->error(L('not_selected_item'));
         }elseif($uid<=1){
             $this->error('初始管理员用户不允许删除！');
             exit();
         }
-        $this->db->delete(array('id'=>$uid));
 
-        if($this->db->affectedRows<=0){
-            $this->error('删除失败！');
+        if(is_array($uid)){
+            $uid = implode(',',$uid);
+            $conditions = '`id` IN ('.$uid.')';
+        }else{
+            $conditions = array('id'=>$uid);
         }
+        $this->db->delete($conditions);
+
+        if($this->db->affectedRows()<=0){
+            $this->error(L('delete_faliure'));
+            exit();
+        }
+        $this->jump($this->referer);
     }
 
     /**
@@ -119,7 +129,7 @@ class user extends base
                 $direct_url = urldecode($this->spArgs('r',spUrl('main','index')));
                 $this->jump($direct_url);
             }elseif($touch==-1){
-                $this->error('账户不存在！');
+                $this->error(L('account_does_not_exist'));
             }else{
                 $this->error(L('login_error'));
 
@@ -139,7 +149,27 @@ class user extends base
         set_session('uid');
         set_session('author_hash');
         $this->success('退出成功!',spUrl('user','login'));
-        //$this->jump(spUrl('user','login'));
+    }
+
+
+    /**
+     * [update_listorder 更新排序]
+     * @return [type] [description]
+     */
+    public function update_listorder(){
+        if($this->isPOST('exec')){
+            $exec = $this->spArgs('exec','');
+            $_query_arr = explode(",",$exec);
+            foreach ($_query_arr as $key => $val) {
+               $_item_arr = explode("#",$val);
+                if(!$this->db->update(array('id'=>$_item_arr[0]),array('list_order'=>$_item_arr[1]))){
+                    $this->error(L('operation_failure'),$this->referer);
+                }
+            }
+            $this->success(L('listorder_update_success'),$this->referer);
+        }else{
+            $this->list_action();
+        }
     }
 
     /**
@@ -148,7 +178,35 @@ class user extends base
     public function add()
     {
         if($this->isPOST()){
-
+            $_username = $this->spArgs('username');
+            if($this->db->checkUser($_username)){
+                $this->error('用户名不能重复！');
+            }
+            $_pwd_halt = create_randomstr(6);
+            $_password = $this->spArgs('password');
+            $_email = $this->spArgs('email');
+            $_mobile = $this->spArgs('mobile','');
+            $_user_group =$this->spArgs('user_group','1');
+            $_birthday = $this->spArgs('birthday','');
+            $_locked = $this->spArgs('status');
+            $data = array(
+                'username'=>$_username,
+                'password'=>$_password,
+                'pwd_hash'=> $_pwd_halt,
+                'user_group'=>$_user_group,
+                'email'=>$_email,
+                'mobile'=>$_mobile,
+                'birthday'=>$_birthday,
+                'locked'=>$_locked
+                );
+            if(strlen($_password)<6||strlen($_password)>16){
+                $this->error('密码长度应为6-16个字符！');
+            }
+            if($this->db->add($data)){
+                $this->success(L('add_success'),spUrl('user','add'));
+            }else{
+                $this->error(L('add_failure'));
+            }
         }else{
             $this->display('user_add.html');
         }

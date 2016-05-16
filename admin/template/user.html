@@ -16,27 +16,28 @@
            <span style="float: right;"> <a class="btn btn-primary" href="{spUrl c="user" a="add"}">{L('add')}</a></span></div>
           <div class="widget-content">
           <div class="widget-content nopadding">
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid"><div class=""><div id="DataTables_Table_0_length" class="dataTables_length"><label>{L('show')}<select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" style="display: none;"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> 记录</label></div></div>
+            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid"><div class=""><div id="DataTables_Table_0_length" class="dataTables_length"><label>{L('show')}<select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" style="display: none;"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> {L('records')}</label></div></div>
+           <form name="edit_form" id="edit_form" method="post">
             <table class="table table-bordered table-striped with-check">
               <thead>
                 <tr>
                   <th><div class="checker" id="uniform-title-table-checkbox"><span><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" style="opacity: 0;"></span></div></th>
                   <th>ID</th>
-                  <th>用户名</th>
-                  <th>邮箱</th>
-                  <th>手机号码</th>
-                  <th>会员组</th>
-                  <th>创建时间</th>
-                  <th>注册IP</th>
-                  <th>上次登录</th>
-                  <th>排序</th>
+                  <th>{L('username')}</th>
+                  <th>{L('email')}</th>
+                  <th>{L('mobile')}</th>
+                  <th>{L('user_group')}</th>
+                  <th>{L('user_createtime')}</th>
+                  <th>{L('register_ip')}</th>
+                  <th>{L('last_login')}</th>
+                  <th>{L('order')}</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody>
               {foreach from=$user_list item=user}
                 <tr>
-                  <td><div class="checker" id="uniform-undefined"><span><input type="checkbox" style="opacity: 0;" value="{$user.id}"/></span></div></td>
+                  <td><div class="checker" id="uniform-undefined"><span><input type="checkbox" name="id[]" style="opacity: 0;" value="{$user.id}"/></span></div></td>
                   <td>{$user.id}</td>
                   <td>{$user.user_name}</td>
                   <td>{$user.email}</td>
@@ -45,17 +46,19 @@
                   <td>{$user.create_time}</td>
                   <td>{$user.register_ip}</td>
                   <td>{$user.last_login}</td>
-                  <td><input class="span1" type="text" name="listorder" value="{$user.list_order}"/></td>
+                  <td><input class="span1" type="text" name="listorder[]" value="{$user.list_order}"/></td>
                   {assign var="user_id" value=$user.id}
-                  <td><a href="{spUrl c="user" a="edit" id="$user_id"}">{L('edit')}</a>&nbsp;&nbsp;<a href="{spUrl c="user" a="delete" id="user_id"}">{L('remove')}</a></td>
+                  <td><a href="{spUrl c="user" a="edit" id="$user_id"}">{L('edit')}</a>&nbsp;&nbsp;<a href="{spUrl c="user" a="delete" id="$user_id"}">{L('remove')}</a></td>
                 </tr>
              {/foreach}
               </tbody>
             </table>
+            <input type="hidden" name="exec" value=""/>
+          </form>
             <form name="search" method="get" action="{spUrl c="user" a="list"}">
             <input type="hidden" name="c" value="user"/>
             <input type="hidden" name="a" value="list"/>
-            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><div class="dataTables_filter" id="DataTables_Table_0_filter"><label>搜索: <input type="text" id="searchbox" name="search" aria-controls="DataTables_Table_0"></label></div><div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate"> <span class="span3"><a class="btn btn-mini btn-primary pull-left" style="margin-left: -30px;" href="/admin/index.php?c=user&amp;a=add">{L('remove')}</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=user&amp;a=add">{L('update_order')}</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=user&amp;a=add">{L('add')}</a></span><a tabindex="0" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_first">首页</a><a tabindex="0" class="previous fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_previous">上一页</a><span><a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">1</a><a tabindex="0" class="fg-button ui-button ui-state-default">2</a><a tabindex="0" class="fg-button ui-button ui-state-default">3</a><a tabindex="0" class="fg-button ui-button ui-state-default">4</a><a tabindex="0" class="fg-button ui-button ui-state-default">5</a></span><a tabindex="0" class="next fg-button ui-button ui-state-default" id="DataTables_Table_0_next">下一页</a><a tabindex="0" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" id="DataTables_Table_0_last">末页</a></div></div> </div>
+            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><div class="dataTables_filter" id="DataTables_Table_0_filter"><label>搜索: <input type="text" id="searchbox" name="search" aria-controls="DataTables_Table_0"></label></div><div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate"> <span class="span3"><a class="btn btn-mini btn-primary pull-left" style="margin-left: -30px;" href="/admin/index.php?c=user&amp;a=delete" onclick="return remove_item()">{L('remove')}</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="javascript:void(0)" onclick="update_listorder()">{L('update_order')}</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=user&amp;a=add">{L('add')}</a></span><a tabindex="0" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_first">首页</a><a tabindex="0" class="previous fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_previous">上一页</a><span><a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">1</a><a tabindex="0" class="fg-button ui-button ui-state-default">2</a><a tabindex="0" class="fg-button ui-button ui-state-default">3</a><a tabindex="0" class="fg-button ui-button ui-state-default">4</a><a tabindex="0" class="fg-button ui-button ui-state-default">5</a></span><a tabindex="0" class="next fg-button ui-button ui-state-default" id="DataTables_Table_0_next">下一页</a><a tabindex="0" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" id="DataTables_Table_0_last">末页</a></div></div> </div>
           </form>
           </div>
         </div>
@@ -72,5 +75,31 @@
     });
   });
 
+function update_listorder() {
+   var exec_str='';
+   var formurl='{spUrl c="user" a="update_listorder"}'; 
+   var form=$('#edit_form');
+   $(form).find('input:text[name^=listorder]').each(function(){
+       var order = $(this).val();
+       var id=$(this).closest('tr').find(':checkbox:eq(0)').val();
+       exec_str+=id+'#'+order+',';
+   });
+   $(form).find('input[name="exec"]').val(exec_str);
+   $(form).attr('action',formurl).submit();
+}
+
+
+function remove_item(){
+   var exec_str='';
+   var formurl='{spUrl c="user" a="delete"}'; 
+   var form=$('#edit_form');
+  $(form).find(':checkbox:checked').each(function(){
+       var id = $(this).val();
+       exec_str+=id+',';
+   });
+   $(form).find('input[name="exec"]').val(exec_str);
+   $(form).attr('action',formurl).submit();
+   return false;
+}
 </script>
 {include file="footer.html"}

@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-04 20:40:21
+ * @Last Modified time: 2016-05-16 18:46:03
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -26,6 +26,7 @@ if(file_exists(APP_PATH.DIRECTORY_SEPARATOR.'coding_env.php')){
     include(APP_PATH.DIRECTORY_SEPARATOR.'coding_env.php');
 }
 isset($db) && $spConfig['db'] = $db;
+date_default_timezone_set($config['time_zone']); //时区设置
 $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . DIRECTORY_SEPARATOR.'runtime'.DIRECTORY_SEPARATOR.'tmp';
 

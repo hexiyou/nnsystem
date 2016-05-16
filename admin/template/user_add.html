@@ -2,13 +2,13 @@
 {$addCss[]="datepicker.css"}
 {$addCss[]="uniform.css"}
 {$addCss[]="select2.css"}
-{assign var="page_title" value="管理员用户编辑"}
+{assign var="page_title" value="添加管理员"}
 {include file="header.html"}
 {include file="sidebar.html"}
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> 主页</a> <a href="#" class="current">用户管理</a> </div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> {L('main_page')}</a> <a href="#" class="current">{L('user_manage')}</a> </div>
     <!--<h1>{$page_title}</h1>-->
   </div>
   <div class="container-fluid">
@@ -17,40 +17,40 @@
         
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-            <h5>管理员用户编辑</h5>
+            <h5>{$page_title}</h5>
             <!--<span class="label label-info">Featured</span>--></div>
           <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
               <div class="control-group">
-                <label class="control-label">用户名</label>
+                <label class="control-label">{L('username')}</label>
                 <div class="controls">
-                  <input type="text" name="required" id="required" value="{$user.user_name}"/>
+                  <input type="text" name="username" id="username" value="{$user.user_name}"/>
                 </div>
               </div>
             
               <div class="control-group">
-                <label class="control-label">邮箱</label>
+                <label class="control-label">{L('email')}</label>
                 <div class="controls">
-                  <input type="text" name="email" id="email" value="{$user.email}">
+                  <input type="text" name="email" id="email" value="{$user.email}"/>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label">手机号码</label>
+                <label class="control-label">{L('mobile')}</label>
                 <div class="controls">
-                  <input type="text" name="mobile" id="mobile" value="{$user.mobile}">
+                  <input type="text" name="mobile" id="mobile" value="{$user.mobile}"/>
                 </div>
               </div>
               <div class="control-group">
-               <label class="control-label">生日</label>
+               <label class="control-label">{L('birthday')}</label>
                 <div class="controls">
                   <div data-date="2012-12-02" class="input-append date datepicker"  data-date-format="yyyy-mm-dd">
-                    <input type="text" value="{date('Y-m-d',$user.birthday)}" data-date-format="yyyy-mm-dd" class=""/>
+                    <input type="text" name="birthday" value="" data-date-format="yyyy-mm-dd" class=""/>
                     <span class="add-on"><i class="icon-th"></i></span> </div>
                 </div>
               </div>
               <div class="control-group">
-              <label class="control-label">会员组</label>
+              <label class="control-label">{L('user_group')}</label>
               <div class="controls">
-                <select >
+                <select name="user_group" id="user_group">
                   <option>First option</option>
                   <option>Second option</option>
                   <option>Third option</option>
@@ -66,19 +66,18 @@
               <label class="control-label">状态</label>
               <div class="controls">
                 <label>
-                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="radios" style="opacity: 0;" value="0"{if $user.lock==0} checked="checked"{/if}></span></div>
+                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="0"{if $user.lock==0} checked="checked"{/if}></span></div>
                   启用</label>
                 <label>
-                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="radios" style="opacity: 0;" value="1"{if $user.lock==1} checked="checked"{/if}></span></div>
+                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="1"{if $user.lock==1} checked="checked"{/if}></span></div>
                   禁用</label>
               </div>
             </div>
              <div class="control-group">
-              <label for="checkboxes" class="control-label">修改密码</label>
+              <label for="checkboxes" class="control-label">设置密码</label>
               <div class="controls">
                 <div data-toggle="buttons-radio" class="btn-group">
-                  <button class="btn btn-primary switch_pwd" type="button">是</button>
-                  <button class="btn btn-primary switch_pwd active" type="button">否</button>
+                 <input type="text" name="password" id="password"/>
                 </div>
               </div>
             </div>
@@ -86,19 +85,19 @@
               <!-- <div class="control-group">
                 <label class="control-label">原始密码</label>
                 <div class="controls">
-                  <input type="text" name="email" id="email">
+                  <input type="text" name="email22" id="email22">
                 </div>
-              </div>-->
+              </div>
                <div class="control-group">
                 <label class="control-label">新密码</label>
                 <div class="controls">
-                  <input type="text" name="email" id="email">
+                  <input type="text" name="new_password" id="new_password">
                 </div>
-              </div>
+              </div>-->
             </div>
               <div class="form-actions">
                 <a class="btn btn-primary"  href="javascript:window.history.back();">返回</a>
-                <input type="submit" value="提交" class="btn btn-success">
+                <input type="submit" name="submit"　value="提交" class="btn btn-success"/>
               </div>
             </form>
 
@@ -109,8 +108,10 @@
 <script type="text/javascript">
 function __setNavStatus(){
   $('li[relctl="user"]').eq(0).addClass('open');
-  $('li[relctl="user"]').find('a[relact="list"]').addClass('nav_active');
+  $('li[relctl="user"]').find('a[relact="add"]').addClass('nav_active');
 }
+var ajaxUrl1 = '{spUrl c="ajax" a="checkUsername"}';
+var ajaxUrl2 = '{spUrl c="ajax" a="checkEmail"}';
 </script>
 <script src="{$JS_PATH}jquery.ui.custom.js"></script> 
 <script src="{$JS_PATH}bootstrap.min.js"></script> 
@@ -120,11 +121,14 @@ function __setNavStatus(){
 <script src="{$JS_PATH}jquery.uniform.js"></script> 
 <script src="{$JS_PATH}select2.min.js"></script> 
 <script src="{$JS_PATH}matrix.js"></script> 
-<script src="{$JS_PATH}matrix.form_common.js"></script> 
+
 <script src="{$JS_PATH}wysihtml5-0.3.0.js"></script> 
 <script src="{$JS_PATH}jquery.peity.min.js"></script> 
 <script src="{$JS_PATH}bootstrap-wysihtml5.js"></script> 
-<!-- <script src="{$JS_PATH}admin.form_validation.js"></script> -->
+<script src="{$JS_PATH}jquery.validate.js"></script> 
+<script src="{$JS_PATH}messages_zh.js"></script> 
+<script src="{$JS_PATH}admin.form_validation.js"></script>
+<script src="{$JS_PATH}matrix.form_common.js"></script>
 <script type="text/javascript">
 
  $('.textarea_editor').wysihtml5();

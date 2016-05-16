@@ -7,6 +7,7 @@ if(file_exists(APP_PATH.DSP.'coding_env.php')){
 isset($db) && $spConfig['db'] = $db;
 isset($view) && $spConfig['view'] = $view;
 isset($config) && define('TPL_DIR', $config['template'] . DSP);
+date_default_timezone_set($config['time_zone']); //时区设置
 
 /////////////////////// URL引用路径设置 //////////////////////////////////
 define('SITE_PATH', $config['site_path'] != "" ? $config['site_path'] : '/');

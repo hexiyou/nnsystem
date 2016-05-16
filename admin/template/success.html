@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit"/>
 {if $url}
-        <meta http-equiv="refresh" content="3;URL={$url}"/>
+{assign var="jumptime" value="$timeout/1000"}
+        <meta http-equiv="refresh" content="{$jumptime};URL={$url}"/>
 {/if}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="template/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 <script type="text/javascript">
   setTimeout(function(){
     {$script}
-  },3000);
+  },{$timeout});
 </script>
 {/if}
 {assign var="nofooterscripts" value="true"}

@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 10:29:32
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-04-21 16:56:49
+ * @Last Modified time: 2016-05-16 18:42:54
  */
 
 // 系统全局配置文件
@@ -27,7 +27,7 @@ $config['site_mobile']      ='';
 $config['site_email']       ='';
 $config['site_zip']         ='';
 $config['site_phone']       ='';
-$config['time_zone'] = 'UTC'; //时区配置
+$config['time_zone'] = 'PRC'; //时区配置
 $config['cookie_domain'] = '';
 $config['cookie_path'] = '/';
 $config['cookie_pre'] = 'c0r_';

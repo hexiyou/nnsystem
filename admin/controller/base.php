@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-16 11:04:11
+ * @Last Modified time: 2016-05-16 19:22:58
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -110,6 +110,7 @@ abstract class base extends spController
         $this->assign('__controller',$GLOBALS['__controller']);
         $this->assign('__action',$GLOBALS['__action']);
         $this->assign('_username',$this->getusername());
+        $this->referer = $_SERVER['HTTP_REFERER'];
         ## coding
     }
 
@@ -121,6 +122,7 @@ abstract class base extends spController
         $this->__set('CFG',$GLOBALS['G_C']); //config.php 配置项赋值
         $this->site_name = $GLOBALS['G_C']['site_name'];
         $this->site_url =  $GLOBALS['G_C']['site_url'];
+        $this->tablePrefix = $GLOBALS['G_SP']['db']['prefix']; //表前缀
     }
 
 
@@ -333,12 +335,14 @@ abstract class base extends spController
      *
      * @param $msg   错误提示需要的相关信息
      * @param $url   跳转地址
+     * @param $timeout  延时时间，单位为毫秒
      */
-    public function error($msg, $url = ''){
+    public function error($msg, $url = '', $timeout=3000){
         $this->page_title = $msg;
         $this->msg = $msg;
         $this->url = $url;
-        if(empty($url)){
+        $this->timeout = $timeout;
+        if(empty($url)||$url=='back'){
             $this->script = 'window.history.back();';
         }
         $this->display('error.html');
@@ -353,12 +357,14 @@ abstract class base extends spController
      *
      * @param $msg   成功提示需要的相关信息
      * @param $url   跳转地址
+     * @param $timeout  延时时间，单位为毫秒
      */
-    public function success($msg, $url = ''){
+    public function success($msg, $url = '', $timeout=3000){
         $this->page_title = $msg;
         $this->msg = $msg;
         $this->url = $url;
-        if(empty($url)){
+        $this->timeout = $timeout;
+        if(empty($url)||$url=='back'){
             $this->script = 'window.history.back();';
         }
         $this->display('success.html');
