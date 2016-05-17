@@ -3,7 +3,7 @@
  * @Author: Xiyou
  * @Date:   2016-04-07 13:21:18
  * @Last Modified by:   Xiyou
- * @Last Modified time: 2016-05-16 19:00:12
+ * @Last Modified time: 2016-05-17 11:43:31
  */
 defined('IN_APP') or exit('Access Denied!');
 class user_model extends spModel
@@ -105,6 +105,23 @@ class user_model extends spModel
          	return $_info[$this->pk];
          }
          return 0;
+	}
+
+	/**
+	 * [update_passwd 修改用户密码]
+	 * @param  [type] $user_id      [description]
+	 * @param  [type] $new_password [description]
+	 * @return [type]               [description]
+	 */
+	public function update_passwd($user_id,$new_password){
+		$_info = $this->find(array('id'=>$user_id));
+         if(empty($_info)){
+         	return false; //账户不存在
+         }
+         $_halt = $_info['pwd_hash'];
+         $_password = $_info['password'];
+         $password_encrypt = md5(md5($new_password).$_halt);
+         return $this->update(array('id'=>$user_id),array('password'=>$password_encrypt));
 	}
 
 

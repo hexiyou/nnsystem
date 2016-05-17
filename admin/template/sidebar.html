@@ -7,7 +7,7 @@
         <li class="divider"></li>
         <li><a href="{spUrl c="user"}"><i class="icon-check"></i> {L('user_manage')}</a></li>
         <li class="divider"></li>
-        <li><a href="login.html"><i class="icon-key"></i>{L('change_passwd')}</a></li>
+        <li><a href="{spUrl c="user" a="changepwd"}"><i class="icon-key"></i>{L('change_passwd')}</a></li>
         <li class="divider"></li>
         <li><a href="{spUrl c="user" a="logout"}"><i class="icon-key"></i>{L('exit')}</a></li>
       </ul>
@@ -24,7 +24,7 @@
       </ul>
     </li>
     <li class=""><a title="{L('goods_manage')}" href="{spUrl c="goods" a="list"}"><i class="icon icon-cog"></i> <span class="text">{L('goods_manage')}</span></a></li>
-    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">订单管理</span></a></li>
+    <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">{L('order_manage')}</span></a></li>
     <li class=""><a title="{L('menu_set')}" href="{spUrl c="setting" a="menu"}"><i class="icon icon-share-alt"></i> <span class="text">{L('menu_set')}</span></a></li>
     <li class=""><a title="{L('member_manage')}" href="{spUrl c="user" a="list"}"><i class="icon icon-share-alt"></i> <span class="text">{L('member_manage')}</span></a></li>
     <li class=""><a title="" href="{spUrl c="setting" a="index"}"><i class="icon icon-share-alt"></i> <span class="text">{L('system_setting')}</span></a></li>
@@ -44,7 +44,7 @@
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i>电话</a>
   <ul>
 
-    <li class="submenu" relctl="user"> <a href="#"><i class="icon icon-th-list"></i><span>用户管理</span> <span class="label label-important">3</span></a>
+    <li class="submenu" relctl="user"> <a href="#"><i class="icon icon-th-list"></i><span>{L('user_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a relact="list" href="{spUrl c="user" a="list"}">{L('user_manage')}</a></li>
         <li><a relact="add" href="{spUrl c="user" a="add"}">{L('user_add')}</a></li>
@@ -52,7 +52,7 @@
       </ul>
     </li>
 
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>内容管理</span> <span class="label label-important">3</span></a>
+    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('content_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="form-common.html">文章分类</a></li>
         <li><a href="form-validation.html">文章列表</a></li>
@@ -60,7 +60,7 @@
       </ul>
     </li>
 
-     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>商品管理</span> <span class="label label-important">3</span></a>
+     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('goods_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="tables.html">商品列表</a></li>
         <li><a href="form-validation.html">添加商品</a></li>
@@ -72,7 +72,7 @@
       </ul>
     </li>
 
-     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>订单管理</span> <span class="label label-important">2</span></a>
+     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('order_manage')}</span> <span class="label label-important">2</span></a>
       <ul>
         <li><a href="tables.html">订单列表</a></li>
         <li><a href="form-wizard.html">未支付订单</a></li>
@@ -92,10 +92,11 @@
       </ul>
     </li>
 
-   <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>广告管理</span> <span class="label label-important">3</span></a>
+   <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('advertise_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a href="form-validation.html">广告列表</a></li>
         <li><a href="form-common.html">广告位管理</a></li>
+        <li><a href="form-common.html">广告代码</a></li>
       </ul>
     </li>
     <li class="submenu" relctl="setting"> <a href="#"><i class="icon icon-th-list"></i> <span>系统设置</span> <span class="label label-important">4</span></a>
@@ -106,7 +107,7 @@
         <li><a relact="seo" href="{spUrl c="setting" a="seo"}">{L('seo_setting')}</a></li>
         <li><a relact="menu" href="{spUrl c="setting" a="menu"}">{L('menu_nav_set')}</a></li>
         <li><a relact="clear" href="{spUrl c="setting" a="clear"}">{L('clear_cache')}</a></li>
-        <li><a href="form-wizard.html">友情链接</a></li>
+        <li><a relact="open" href="{spUrl c="setting" a="open"}">第三方登录</a></li>
       </ul>
     </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
@@ -134,6 +135,7 @@
       <ul>
         <li><a href="form-common.html">模板选择</a></li>
         <li><a href="form-common.html">模板编辑</a></li>
+        <li><a href="form-common.html">风格设置</a></li>
       </ul>
     </li>
     </li>

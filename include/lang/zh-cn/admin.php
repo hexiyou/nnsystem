@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:52
- * @Last Modified time: 2016-05-16 19:09:35
+ * @Last Modified time: 2016-05-17 11:45:03
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -30,3 +30,14 @@ $LANG['birthday'] = '生日';
 $LANG['not_selected_item'] = '未选择项目';
 $LANG['add_success'] = '添加成功';
 $LANG['add_failure'] = '添加失败';
+$LANG['advertise_manage'] = '广告管理';
+$LANG['role_name'] = '角色名称';
+$LANG['role_description'] = '角色描述';
+$LANG['user_status'] = '用户状态';
+$LANG['content_manage'] = '内容管理';
+$LANG['order_manage'] = '订单管理';
+$LANG['user_name'] = '用户名';
+$LANG['old_password'] = '原始密码';
+$LANG['new_password'] = '新密码';
+$LANG['update_passwd_success'] = '修改密码成功，请重新登录！';
+$LANG['update_passwd_failure'] = '修改密码失败！';

@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:43
- * @Last Modified time: 2016-05-16 13:45:11
+ * @Last Modified time: 2016-05-17 11:02:45
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -17,6 +17,7 @@ $LANG['enable'] = '启用';
 $LANG['order'] = '排序';
 $LANG['disable'] = '禁用';
 $LANG['messages'] = '消息';
+$LANG['operation'] = '操作';
 $LANG['new_message'] = '新消息';
 $LANG['inbox'] = '收件箱';
 $LANG['sendbox'] = '发件箱';

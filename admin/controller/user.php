@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-05-16 19:19:50
+ * @Last Modified time: 2016-05-17 11:59:43
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -142,13 +142,22 @@ class user extends base
 
 
     /**
-     * [logout 注销管理员登录]
+     * [logout 注销管理员登录，显式]
      * @return [type] [description]
      */
     public function logout(){
+        $this->_logout();
+        $this->success('退出成功!',spUrl('user','login'));
+    }
+
+    /**
+     * [_logout 注销管理员登录，隐式]
+     * @return [type] [description]
+     */
+    public function _logout(){
+        $this->_clearUserCache($this->getuid());
         set_session('uid');
         set_session('author_hash');
-        $this->success('退出成功!',spUrl('user','login'));
     }
 
 
@@ -212,9 +221,33 @@ class user extends base
         }
     }
 
+    /**
+     * [changepwd 更改当前登录管理员密码]
+     * @return [type] [description]
+     */
+    public function changepwd(){
+        if($this->isPOST()){
+            $old_password = $this->spArgs('old_password');
+            $new_password = $this->spArgs('new_password');
+            $user_name = $this->getusername();
+            if(!$old_password||!$new_password){
+                $this->error('原密码和新密码不能为空');
+            }
 
-    public function auto()
-    {
-        $this->allvars = $_SERVER;
+            if(!$this->db->userLogin($user_name,$old_password)){
+                $this->error('原始密码填写错误，请修正');
+            }
+            $user = $this->_getUserInfo();
+            if($this->db->update_passwd($user['id'],$new_password)){
+                $this->_logout();
+                $this->success(L('update_passwd_success'),spUrl('user','login'));
+            }else{
+                $this->error(L('update_passwd_failure'));
+            }
+        }else{
+            $this->_user = $this->_getUserInfo();
+            $this->display('change_pwd.html');
+        }
     }
+
 }

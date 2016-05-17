@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-16 19:22:58
+ * @Last Modified time: 2016-05-17 11:58:32
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -278,12 +278,21 @@ abstract class base extends spController
         if(!$_user){
             $_model = spClass('user_model');
             $_user = $_model->getUserByID($uid); 
-            spAccess('w',$this->_cache_prefix.$uid,$_user);         
+            spAccess('w',$this->_cache_prefix.$uid,$_user); //临时缓存       
         }
         if(!$_user||$_author_hash != md5($_user['password'].$_user['pwd_hash'])){
             return false;
         }
         return true;
+    }
+
+    /**
+     * [_clearUserCache 清除用户登录缓存，修改密码后须立即调用]
+     * @return [type] [description]
+     */
+    public function _clearUserCache($uid=null){
+        $uid=$uid==null?$this->getuid():$uid;
+        return spAccess('c',$this->_cache_prefix.$uid);
     }
 
 
@@ -322,7 +331,7 @@ abstract class base extends spController
      * @return [type] [description]
      */
     public function getusername(){
-        $info  = $this->_getUserInfo();
+        $info = $this->_getUserInfo();
         return $info['user_name'];
     }
 

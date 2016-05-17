@@ -3,7 +3,7 @@
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> 主页</a> <a href="#" class="current">{L('user_group_manage')}</a> </div>
+    <div id="breadcrumb"> <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> {L('main_page')}</a> <a href="#" class="current">{L('user_group_manage')}</a> </div>
     <!--<h1>{$page_title}</h1>-->
   </div>
   <div class="container-fluid">
@@ -22,15 +22,11 @@
                 <tr>
                   <th><div class="checker" id="uniform-title-table-checkbox"><span><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" style="opacity: 0;"></span></div></th>
                   <th>ID</th>
-                  <th>用户名</th>
-                  <th>邮箱</th>
-                  <th>手机号码</th>
-                  <th>会员组</th>
-                  <th>创建时间</th>
-                  <th>注册IP</th>
-                  <th>上次登录</th>
-                  <th>排序</th>
-                  <th>操作</th>
+                  <th>{L('role_name')}</th>
+                  <th>{L('role_description')}</th>
+                  <th>{L('user_status')}</th>
+                  <th>{L('order')}</th>
+                  <th>{L('operation')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,14 +36,10 @@
                   <td>{$user.id}</td>
                   <td>{$user.user_name}</td>
                   <td>{$user.email}</td>
-                  <td>{$user.mobile}</td>
-                  <td>{$user.groupname}</td>
-                  <td>{$user.create_time}</td>
-                  <td>{$user.register_ip}</td>
                   <td>{$user.last_login}</td>
                   <td><input class="span1" type="text" name="listorder" value="{$user.list_order}"/></td>
                   {assign var="user_id" value=$user.id}
-                  <td><a href="{spUrl c="user" a="edit" id="$user_id"}">编辑</a>&nbsp;&nbsp;<a href="{spUrl c="user" a="delete" id="user_id"}">删除</a></td>
+                  <td><a href="{spUrl c="group" a="edit" id="$user_id"}">{L('edit')}</a>&nbsp;&nbsp;<a href="{spUrl c="group" a="delete" id="user_id"}">{L('remove')}</a></td>
                 </tr>
              {/foreach}
               </tbody>
@@ -55,7 +47,7 @@
             <form name="search" method="get" action="{spUrl c="user" a="list"}">
             <input type="hidden" name="c" value="user"/>
             <input type="hidden" name="a" value="list"/>
-            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><div class="dataTables_filter" id="DataTables_Table_0_filter"><label>搜索: <input type="text" id="searchbox" name="search" aria-controls="DataTables_Table_0"></label></div><div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate"> <span class="span3"><a class="btn btn-mini btn-primary pull-left" style="margin-left: -30px;" href="/admin/index.php?c=user&amp;a=add">删除</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=user&amp;a=add">更新排序</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=user&amp;a=add">添加</a></span><a tabindex="0" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_first">首页</a><a tabindex="0" class="previous fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_previous">上一页</a><span><a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">1</a><a tabindex="0" class="fg-button ui-button ui-state-default">2</a><a tabindex="0" class="fg-button ui-button ui-state-default">3</a><a tabindex="0" class="fg-button ui-button ui-state-default">4</a><a tabindex="0" class="fg-button ui-button ui-state-default">5</a></span><a tabindex="0" class="next fg-button ui-button ui-state-default" id="DataTables_Table_0_next">下一页</a><a tabindex="0" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" id="DataTables_Table_0_last">末页</a></div></div> </div>
+            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><div class="dataTables_filter" id="DataTables_Table_0_filter"><label>搜索: <input type="text" id="searchbox" name="search" aria-controls="DataTables_Table_0"></label></div><div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="DataTables_Table_0_paginate"> <span class="span3"><a class="btn btn-mini btn-primary pull-left" style="margin-left: -30px;" href="/admin/index.php?c=group&amp;a=add">删除</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=group&amp;a=add">更新排序</a>&nbsp;<a class="btn btn-mini btn-primary pull-left" href="/admin/index.php?c=group&amp;a=add">添加</a></span><a tabindex="0" class="first ui-corner-tl ui-corner-bl fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_first">首页</a><a tabindex="0" class="previous fg-button ui-button ui-state-default ui-state-disabled" id="DataTables_Table_0_previous">上一页</a><span><a tabindex="0" class="fg-button ui-button ui-state-default ui-state-disabled">1</a><a tabindex="0" class="fg-button ui-button ui-state-default">2</a><a tabindex="0" class="fg-button ui-button ui-state-default">3</a><a tabindex="0" class="fg-button ui-button ui-state-default">4</a><a tabindex="0" class="fg-button ui-button ui-state-default">5</a></span><a tabindex="0" class="next fg-button ui-button ui-state-default" id="DataTables_Table_0_next">下一页</a><a tabindex="0" class="last ui-corner-tr ui-corner-br fg-button ui-button ui-state-default" id="DataTables_Table_0_last">末页</a></div></div> </div>
           </form>
           </div>
         </div>
