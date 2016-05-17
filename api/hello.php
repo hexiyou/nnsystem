@@ -2,17 +2,11 @@
 /**
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
- * @Date:   2016-04-18 11:45:39
- * @Last Modified time: 2016-05-17 17:47:40
+ * @Date:   2016-05-17 15:10:57
+ * @Last Modified time: 2016-05-17 15:47:03
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
+defined('IN_APP') or exit('Access Denied!');
 
-class user_model extends spModel
-{
-	
-	function __construct()
-	{
-		parent::__construct();
-	}
-}
+echo "Hello World";

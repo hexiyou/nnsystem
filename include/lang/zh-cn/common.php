@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:43
- * @Last Modified time: 2016-05-17 11:02:45
+ * @Last Modified time: 2016-05-17 15:31:32
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -15,9 +15,13 @@ $LANG['add'] = '添加';
 $LANG['exit'] = '退出';
 $LANG['enable'] = '启用';
 $LANG['order'] = '排序';
+$LANG['run'] = '运行';
 $LANG['disable'] = '禁用';
 $LANG['messages'] = '消息';
+$LANG['status'] = '状态';
 $LANG['operation'] = '操作';
+$LANG['welcome'] = '欢迎';
+$LANG['records'] = '记录';
 $LANG['new_message'] = '新消息';
 $LANG['inbox'] = '收件箱';
 $LANG['sendbox'] = '发件箱';
@@ -54,6 +58,4 @@ $LANG['member_remove'] = '会员删除';
 $LANG['member_username'] = '会员名称';
 $LANG['member_login_log'] = '登录日志';
 $LANG['menu_nav_set'] = '导航菜单管理';
-$LANG['welcome'] = '欢迎';
-$LANG['records'] = '记录';
 $LANG['language_clear_complete'] = '语言缓存清除完成';

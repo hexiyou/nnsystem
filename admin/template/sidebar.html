@@ -44,7 +44,7 @@
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i>电话</a>
   <ul>
 
-    <li class="submenu" relctl="user"> <a href="#"><i class="icon icon-th-list"></i><span>{L('user_manage')}</span> <span class="label label-important">3</span></a>
+    <li class="submenu" relctl="user"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('user_manage')}</span> <span class="label label-important">3</span></a>
       <ul>
         <li><a relact="list" href="{spUrl c="user" a="list"}">{L('user_manage')}</a></li>
         <li><a relact="add" href="{spUrl c="user" a="add"}">{L('user_add')}</a></li>
@@ -110,11 +110,13 @@
         <li><a relact="open" href="{spUrl c="setting" a="open"}">第三方登录</a></li>
       </ul>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
+    <li relctl="cloud" class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>拓展及插件</span> <span class="label label-important">3</span></a>
       <ul>
-        <li><a href="form-common.html">模板管理</a></li>
-        <li><a href="form-validation.html">数据库管理</a></li>
-        <li><a href="form-wizard.html">用户管理</a></li>
+        <li><a relact="api_list" href="{spUrl c="api" a="list"}">API管理</a></li>
+        <li><a href="form-validation.html">插件管理</a></li>
+        <li><a href="form-wizard.html">定时任务</a></li>
+        <li><a href="form-wizard.html">远程备份</a></li>
+        <li><a href="{spUrl c="cloud" a="update"}">{L('online_update')}</a></li>
       </ul>
     </li>
     <li class="submenu" relctl="member"> <a href="#"><i class="icon icon-th-list"></i> <span>{L('member_manage')}</span> <span class="label label-important">3</span></a>

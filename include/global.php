@@ -87,6 +87,57 @@ function loadOauth($platform = "qq") {
 }
 
 /**
+ * [is_Sae_env 判断是否是新浪SAE环境]
+ * @return boolean [description]
+ */
+function is_Sae_env(){
+	if(isset($_SERVER['HTTP_APPNAME']) && isset($_SERVER['HTTP_APPVERSION']) && defined('SAE_TMP_PATH')){
+		return true;
+	}
+	return false;
+}
+
+
+/**
+ * [getMemcacheKeys 获取所有Memcache的key]
+ * @return [type] [description]
+ */
+function getMemcacheKeys() {
+
+$memcache = new Memcache;
+$memcache->connect();
+
+$list = array();
+$allSlabs = $memcache->getExtendedStats('slabs');
+foreach($allSlabs as $server => $slabs)
+{
+  foreach($slabs as $slabId => $slabInfo)
+  {
+	if(isset($allSlabIds[$slabId])) 
+	 {
+		continue;
+     }
+    $allSlabIds[$slabId] = 1;
+  }
+}
+
+$items = $memcache->getExtendedStats('items');
+foreach($allSlabIds as $slabId => $counter)
+{
+  $cdump = $memObj->getExtendedStats('cachedump',(int)$slabId);
+  foreach($cdump AS $keys => $arrVal)
+  {
+	if (!is_array($arrVal)) continue;
+	  foreach($arrVal AS $k => $v)
+	  {
+	      echo $k ."<br>";
+	  }
+  }
+}
+
+}
+
+/**
  * [get_cookie 全局函数:获取cookie值]
  * [安全性考虑，自动附加配置文件前缀选项]
  * @param  string $name [description]

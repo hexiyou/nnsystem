@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:52
- * @Last Modified time: 2016-05-17 11:45:03
+ * @Last Modified time: 2016-05-17 17:38:14
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -30,6 +30,8 @@ $LANG['birthday'] = '生日';
 $LANG['not_selected_item'] = '未选择项目';
 $LANG['add_success'] = '添加成功';
 $LANG['add_failure'] = '添加失败';
+$LANG['delete_success'] = '删除成功';
+$LANG['delete_failure'] = '删除失败';
 $LANG['advertise_manage'] = '广告管理';
 $LANG['role_name'] = '角色名称';
 $LANG['role_description'] = '角色描述';
@@ -41,3 +43,9 @@ $LANG['old_password'] = '原始密码';
 $LANG['new_password'] = '新密码';
 $LANG['update_passwd_success'] = '修改密码成功，请重新登录！';
 $LANG['update_passwd_failure'] = '修改密码失败！';
+$LANG['role_name'] = '角色名称';
+$LANG['role_description'] = '角色描述';
+$LANG['extension_and_plugin'] = '拓展及插件';
+$LANG['online_update'] = '在线升级';
+$LANG['api_list'] = 'API列表管理';
+$LANG['super_user_delete_deined'] = '超级管理员不允许删除';

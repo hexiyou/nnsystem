@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-17 12:37:31
+ * @Last Modified time: 2016-05-17 17:51:34
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
@@ -14,6 +14,7 @@ defined('IN_ADMIN') or exit('Access Denied!');
 //系统后台初始化环境文件
 @include_once(APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'define.php');
 include(APP_PATH.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'global.php');//公共函数库
+include(ADMIN_PATH.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'admin.func.php'); //后台公共函数库
 define('ADMIN_TPL', ADMIN_PATH . DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR); //后台模板路径
 
 define('ADMIN_ROOT',basename(getcwd())); //获取后台管理目录文件夹名称，仅文件夹名

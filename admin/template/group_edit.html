@@ -2,7 +2,7 @@
 {$addCss[]="datepicker.css"}
 {$addCss[]="uniform.css"}
 {$addCss[]="select2.css"}
-{assign var="page_title" value="添加角色"}
+{assign var="page_title" value="编辑用户组"}
 {include file="header.html"}
 {include file="sidebar.html"}
 
@@ -21,14 +21,14 @@
               <div class="control-group">
                 <label class="control-label">{L('role_name')}</label>
                 <div class="controls">
-                  <input type="text" name="name" id="name" value=""/>
+                  <input type="text" name="name" id="name" value="{$group.title}"/>
                 </div>
               </div>
             
             <div class="control-group">
               <label class="control-label">{L('role_description')}</label>
               <div class="controls">
-                <textarea name="description" class="span6"></textarea>
+                <textarea name="description" class="span6">{$group.description}</textarea>
               </div>
             </div>
         
@@ -36,10 +36,10 @@
               <label class="control-label">{L('status')}</label>
               <div class="controls">
                 <label>
-                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="0"{if $user.lock==1} checked="checked"{/if}></span></div>
+                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="0"{if $group.status==1} checked="checked"{/if}></span></div>
                   {L('enable')}</label>
                 <label>
-                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="1"{if $user.lock==0} checked="checked"{/if}></span></div>
+                  <div class="radio" id="uniform-undefined"><span><input type="radio" name="status" style="opacity: 0;" value="1"{if $group.status==0} checked="checked"{/if}></span></div>
                   {L('disable')}</label>
               </div>
             </div>
@@ -47,10 +47,10 @@
              <div class="control-group">
                 <label class="control-label">{L('order')}</label>
                 <div class="controls">
-                  <input type="text" name="list_order" id="list_order" value="" placeholder="100" class="span1" />
+                  <input type="text" name="list_order" id="list_order" value="{$group.list_order}" placeholder="100" class="span1" />
                 </div>
               </div>
-          
+          <input type="hidden" name="id" value="{$group.id}"/>
               <div class="form-actions">
                 <a class="btn btn-primary"  href="javascript:window.history.back();">{L('back')}</a>
                 <input type="submit" name="submit"　value="{L('submit')}" class="btn btn-success"/>
