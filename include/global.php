@@ -104,38 +104,28 @@ function is_Sae_env(){
  */
 function getMemcacheKeys() {
 
-$memcache = new Memcache;
-$memcache->connect();
+    $memcache = new Memcache;
+    $memcache->connect('127.0.0.1', 11211) or die ("Could not connect to memcache server");
 
-$list = array();
-$allSlabs = $memcache->getExtendedStats('slabs');
-foreach($allSlabs as $server => $slabs)
-{
-  foreach($slabs as $slabId => $slabInfo)
-  {
-	if(isset($allSlabIds[$slabId])) 
-	 {
-		continue;
-     }
-    $allSlabIds[$slabId] = 1;
-  }
+    $list = array();
+    ////// test /////
+    $memcache -> add('date_a',date('Y-m-d H:i:s'),false,0);
+    ///////////////
+    $allSlabs = $memcache->getExtendedStats('slabs');
+    $items = $memcache->getExtendedStats('items');
+    foreach($allSlabs as $server => $slabs) {
+        foreach($slabs AS $slabId => $slabMeta) {
+           $cdump = $memcache->getExtendedStats('cachedump',(int)$slabId);
+            foreach($cdump AS $keys => $arrVal) {
+                if (!is_array($arrVal)) continue;
+                foreach($arrVal AS $k => $v) {                   
+                    echo $k .'<br>';
+                }
+           }
+        }
+    }   
 }
 
-$items = $memcache->getExtendedStats('items');
-foreach($allSlabIds as $slabId => $counter)
-{
-  $cdump = $memObj->getExtendedStats('cachedump',(int)$slabId);
-  foreach($cdump AS $keys => $arrVal)
-  {
-	if (!is_array($arrVal)) continue;
-	  foreach($arrVal AS $k => $v)
-	  {
-	      echo $k ."<br>";
-	  }
-  }
-}
-
-}
 
 /**
  * [get_cookie 全局函数:获取cookie值]
