@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-18 11:45:24
- * @Last Modified time: 2016-05-13 17:49:40
+ * @Last Modified time: 2016-05-17 12:43:14
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -71,10 +71,11 @@ class setting extends base
      * @return [type] [description]
      */
     public function clear_datacache(){
-    	$_dirpath = APP_PATH.DSP.'runtime'.DSP.'tmp';
+    	// $_dirpath = APP_PATH.DSP.'runtime'.DSP.'tmp';
+        $_dirpath = $GLOBALS['G_SP']['sp_cache'];
     	$cache_files = get_files($_dirpath);
     	foreach ($cache_files as $_file) {
-    		unlink($_file);
+    		@unlink($_file);
     	}
     	return true;
     }
@@ -84,10 +85,11 @@ class setting extends base
      * @return [type] [description]
      */
     public function clear_tplcompile(){
-    	$_dirpath = APP_PATH.DSP.'runtime'.DSP.'compile';
+    	// $_dirpath = APP_PATH.DSP.'runtime'.DSP.'compile';
+        $_dirpath = str_replace(ADMIN_ROOT,'',$GLOBALS['G_SP']['view']['config']['compile_dir']);
     	$cache_files = get_files($_dirpath);
     	foreach ($cache_files as $_file) {
-    		unlink($_file);
+    		@unlink($_file);
     	}
     	return true;
     }

@@ -3,13 +3,14 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-05-16 18:46:03
+ * @Last Modified time: 2016-05-17 12:37:31
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
 defined('IN_APP') or exit('Access Denied!');
+defined('IN_ADMIN') or exit('Access Denied!');
 //系统后台初始化环境文件
 @include_once(APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'define.php');
 include(APP_PATH.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'global.php');//公共函数库
