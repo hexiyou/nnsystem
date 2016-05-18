@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>{if $title}{$title}{else}{$page_title}-{$site_name}{/if}</title>
+</head>
+<body>
+<h2>查看模板渲染效果，测试专用</h2>
+<div>点击下面对应链接，查看后台模板静态渲染效果</div>
+	<table>
+		{foreach from=$files item=file}
+		<tr>
+			<td>{basename($file)}</td>
+			<td></td>
+			<td>
+			{$tpl=basename($file)}
+			<a href="{spUrl c="extend" a="showtpl" tpl="$tpl"}" target="_blank">查看效果</a>
+			</td>
+		</tr>
+
+		{/foreach}
+	</table>
+</body>
+</html>
