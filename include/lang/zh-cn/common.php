@@ -3,7 +3,7 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-05-12 16:09:43
- * @Last Modified time: 2016-05-17 15:31:32
+ * @Last Modified time: 2016-05-18 15:03:53
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
@@ -59,3 +59,4 @@ $LANG['member_username'] = '会员名称';
 $LANG['member_login_log'] = '登录日志';
 $LANG['menu_nav_set'] = '导航菜单管理';
 $LANG['language_clear_complete'] = '语言缓存清除完成';
+$LANG['goods_list'] = '商品列表';
