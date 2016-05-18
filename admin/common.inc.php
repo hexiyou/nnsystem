@@ -3,14 +3,18 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   $DATE$ $TIME$
- * @Last Modified time: 2016-04-20 13:52:40
+ * @Last Modified time: 2016-05-17 17:51:34
  * @Packages:   nnCMS
  * @User:  $user$
  * @File:  Filename()
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
+defined('IN_APP') or exit('Access Denied!');
+defined('IN_ADMIN') or exit('Access Denied!');
 //系统后台初始化环境文件
 @include_once(APP_PATH.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'define.php');
+include(APP_PATH.DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'global.php');//公共函数库
+include(ADMIN_PATH.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'admin.func.php'); //后台公共函数库
 define('ADMIN_TPL', ADMIN_PATH . DIRECTORY_SEPARATOR.'template'.DIRECTORY_SEPARATOR); //后台模板路径
 
 define('ADMIN_ROOT',basename(getcwd())); //获取后台管理目录文件夹名称，仅文件夹名
@@ -24,15 +28,15 @@ if(file_exists(APP_PATH.DIRECTORY_SEPARATOR.'coding_env.php')){
     include(APP_PATH.DIRECTORY_SEPARATOR.'coding_env.php');
 }
 isset($db) && $spConfig['db'] = $db;
+date_default_timezone_set($config['time_zone']); //时区设置
 $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . DIRECTORY_SEPARATOR.'runtime'.DIRECTORY_SEPARATOR.'tmp';
 
 //附加类库路径
 $spConfig['include_path'][] = ADMIN_PATH . DIRECTORY_SEPARATOR.'lib';
-
+$spConfig['ext'] = array();   //载入拓展配置前初始化其配置为空数组
 
 // 判断是否开启URL重写
-
 if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 
 	$spConfig['launch'] = array( // 加入挂靠点，以便开始使用Url_ReWrite的功能
@@ -46,7 +50,7 @@ if (isset($config['url_rewrite']) && $config['url_rewrite'] == 1) {
 	);
 
 	$spConfig['ext']['spUrlRewrite'] = array(
-		'suffix' => '.html',
+		'suffix' => isset($config['url_suffix'])&&$config['url_suffix']!=""?$config['url_suffix']:"",
 		'sep' => '-',
 		'map' => array(
 			'login' => 'user@login',

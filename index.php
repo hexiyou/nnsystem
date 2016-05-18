@@ -3,10 +3,11 @@
  * @Author: Lonelyer <hackkey@qq.com>
  * @link:  http://www.7s.com.cn
  * @Date:   2016-04-09 18:31:45
- * @Last Modified time: 2016-04-18 10:31:49
+ * @Last Modified time: 2016-05-04 20:36:47
  * @Packages:   nnCMS
  * @Copyright: Copyright (c) 2016 7s.com.cn.Co.Ltd. All rights reserved.
  */
+define('IN_APP',true);//入口绑定，防止非法调用PHP文件
 define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",APP_PATH.DIRECTORY_SEPARATOR.'framework');
 //各类数据和配置文件存储路径
@@ -23,6 +24,9 @@ file_exists(DATA_PATH.'config.php') && include_once(DATA_PATH.'config.php');
 
 //载入初始化文件
 require_once(APP_PATH.DIRECTORY_SEPARATOR.'common.inc.php');
+
+//载入新浪云平台环境配置文件
+file_exists(APP_PATH.DSP.'sae_env.php') && include(APP_PATH.DSP.'sae_env.php');
 
 /** 载入框架 **/
 require(SP_PATH.DIRECTORY_SEPARATOR."SpeedPHP.php");

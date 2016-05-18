@@ -33,7 +33,8 @@ if exist "%pwd%%sqlname%.sql" (set /a curnumber=%curnumber%+1&&goto :getSQLname)
 
 
 %mysqldump% --add-drop-table --lock-tables --single-transaction %dbname% -u%dbuser% -p%dbpass%>%pwd%%sqlname%.sql
-echo   执行完毕...
+copy %pwd%%sqlname%.sql %dbname%.sql /Y
+echo   执行完毕...&title  导出完毕!!
 if not "x%requirePause%"=="xcontinue" pause
 goto :eof
 

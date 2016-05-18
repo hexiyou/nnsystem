@@ -7,6 +7,7 @@ if(file_exists(APP_PATH.DSP.'coding_env.php')){
 isset($db) && $spConfig['db'] = $db;
 isset($view) && $spConfig['view'] = $view;
 isset($config) && define('TPL_DIR', $config['template'] . DSP);
+date_default_timezone_set($config['time_zone']); //时区设置
 
 /////////////////////// URL引用路径设置 //////////////////////////////////
 define('SITE_PATH', $config['site_path'] != "" ? $config['site_path'] : '/');
@@ -28,6 +29,7 @@ $spConfig['db_spdb_full_tblname'] = false; //是否使用表全名
 $spConfig['sp_cache'] = APP_PATH . '/runtime/tmp'; //临时目录
 $spConfig['dispatcher_error'] = "import(SP_PATH.'/Misc/404.php');exit();"; //404错误页面
 //$spConfig['auto_load_controller'][] = 'base'; //自动加载控制器
+$spConfig['ext'] = array();   //载入拓展配置前初始化其配置为空数组
 
 // 根据全局配置项判断是否开启伪静态
 if ($config['url_rewrite'] == TRUE) {
@@ -44,13 +46,14 @@ if ($config['url_rewrite'] == TRUE) {
     // URL 重写路由映射配置
     $spConfig['ext']['spUrlRewrite'] = array(
         //'suffix' => '.html',
-        'suffix' => '', 
+        'suffix' => isset($config['url_suffix'])&&$config['url_suffix']!=""?$config['url_suffix']:"", 
         'sep'    => '-',
         'map'    => array(
             'index'    => 'main@index',
             'login'    => 'user@login',
             'register' => 'user@register',
             'logout'   => 'user@logout',
+            'verify-show.gif'   => 'verify@show',
             '<c>-list' => '<c>@list_action',
             //'<c>-list'=>'<c>@list_action',
             //'category-@' => 'category@__empty',
